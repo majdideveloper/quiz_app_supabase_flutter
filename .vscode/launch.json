@@ -1,0 +1,80 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Mobile (Development)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "cwd": "${workspaceFolder}/packages/mobile",
+      "args": [
+        "--dart-define-from-file=${workspaceFolder}/.env.develop"
+      ]
+    },
+    {
+      "name": "Mobile (Staging)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "cwd": "${workspaceFolder}/packages/mobile",
+      "args": [
+        "--dart-define-from-file=${workspaceFolder}/.env.staging"
+      ]
+    },
+    {
+      "name": "Mobile (Production)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "cwd": "${workspaceFolder}/packages/mobile",
+      "args": [
+        "--dart-define-from-file=${workspaceFolder}/.env.production"
+      ]
+    },
+    {
+      "name": "Web (Development)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "cwd": "${workspaceFolder}/packages/web",
+      "args": [
+        "--dart-define-from-file=${workspaceFolder}/.env.develop",
+        "-d",
+        "chrome"
+      ]
+    },
+    {
+      "name": "Web (Staging)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "cwd": "${workspaceFolder}/packages/web",
+      "args": [
+        "--dart-define-from-file=${workspaceFolder}/.env.staging",
+        "-d",
+        "chrome"
+      ]
+    },
+    {
+      "name": "Web (Production)",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "cwd": "${workspaceFolder}/packages/web",
+      "args": [
+        "--dart-define-from-file=${workspaceFolder}/.env.production",
+        "-d",
+        "chrome"
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Mobile & Web (Development)",
+      "configurations": [
+        "Mobile (Development)",
+        "Web (Development)"
+      ]
+    }
+  ]
+}
