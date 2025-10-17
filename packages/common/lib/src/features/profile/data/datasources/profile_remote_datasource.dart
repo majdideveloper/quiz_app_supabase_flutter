@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/utils/logger.dart';
+import '../../../auth/domain/entities/user_entity.dart';
 import '../../domain/entities/profile_entity.dart';
 import '../models/profile_model.dart';
 

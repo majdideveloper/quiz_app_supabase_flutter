@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../auth/domain/entities/user_entity.dart';
 import '../../domain/entities/profile_entity.dart';
 
 part 'profile_model.freezed.dart';
@@ -16,33 +17,54 @@ class ProfileModel with _$ProfileModel {
   const factory ProfileModel({
     required String id,
     required String email,
-    @JsonKey(name: 'full_name') required String fullName,
-    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    @JsonKey(name: 'full_name')
+    required String fullName,
+    @JsonKey(name: 'avatar_url')
+    String? avatarUrl,
     String? phone,
     String? bio,
     required UserRole role,
-    @JsonKey(name: 'email_verified') @Default(false) bool emailVerified,
-    @JsonKey(name: 'is_active') @Default(true) bool isActive,
-    @JsonKey(name: 'date_of_birth') DateTime? dateOfBirth,
+    @JsonKey(name: 'email_verified')
+    @Default(false)
+    bool emailVerified,
+    @JsonKey(name: 'is_active')
+    @Default(true)
+    bool isActive,
+    @JsonKey(name: 'date_of_birth')
+    DateTime? dateOfBirth,
     String? address,
     String? city,
     String? province,
-    @JsonKey(name: 'postal_code') String? postalCode,
+    @JsonKey(name: 'postal_code')
+    String? postalCode,
     String? country,
-    @JsonKey(name: 'preferred_language') @Default('fr') String preferredLanguage,
+    @JsonKey(name: 'preferred_language')
+    @Default('fr')
+    String preferredLanguage,
     @JsonKey(name: 'notifications_enabled')
     @Default(false)
     bool notificationsEnabled,
     @JsonKey(name: 'email_notifications_enabled')
     @Default(false)
     bool emailNotificationsEnabled,
-    @JsonKey(name: 'total_enrollments') @Default(0) int totalEnrollments,
-    @JsonKey(name: 'completed_courses') @Default(0) int completedCourses,
-    @JsonKey(name: 'certificates_earned') @Default(0) int certificatesEarned,
-    @JsonKey(name: 'total_points') @Default(0) int totalPoints,
-    @JsonKey(name: 'last_login_at') DateTime? lastLoginAt,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'total_enrollments')
+    @Default(0)
+    int totalEnrollments,
+    @JsonKey(name: 'completed_courses')
+    @Default(0)
+    int completedCourses,
+    @JsonKey(name: 'certificates_earned')
+    @Default(0)
+    int certificatesEarned,
+    @JsonKey(name: 'total_points')
+    @Default(0)
+    int totalPoints,
+    @JsonKey(name: 'last_login_at')
+    DateTime? lastLoginAt,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
   }) = _ProfileModel;
 
   const ProfileModel._();

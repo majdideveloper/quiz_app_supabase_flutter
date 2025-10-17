@@ -15,17 +15,30 @@ part 'user_progress_model.g.dart';
 class UserProgressModel with _$UserProgressModel {
   const factory UserProgressModel({
     required String id,
-    @JsonKey(name: 'user_id') required String userId,
-    @JsonKey(name: 'enrollment_id') required String enrollmentId,
-    @JsonKey(name: 'lesson_id') required String lessonId,
+    @JsonKey(name: 'user_id')
+    required String userId,
+    @JsonKey(name: 'enrollment_id')
+    required String enrollmentId,
+    @JsonKey(name: 'lesson_id')
+    required String lessonId,
     required bool completed,
-    @JsonKey(name: 'completed_at') DateTime? completedAt,
-    @JsonKey(name: 'time_spent') @Default(0) int timeSpent,
-    @JsonKey(name: 'last_accessed_at') DateTime? lastAccessedAt,
-    @JsonKey(name: 'video_progress') @Default(0) int videoProgress,
-    @JsonKey(name: 'video_completed') @Default(false) bool videoCompleted,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'completed_at')
+    DateTime? completedAt,
+    @JsonKey(name: 'time_spent')
+    @Default(0)
+    int timeSpent,
+    @JsonKey(name: 'last_accessed_at')
+    DateTime? lastAccessedAt,
+    @JsonKey(name: 'video_progress')
+    @Default(0)
+    int videoProgress,
+    @JsonKey(name: 'video_completed')
+    @Default(false)
+    bool videoCompleted,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
   }) = _UserProgressModel;
 
   const UserProgressModel._();

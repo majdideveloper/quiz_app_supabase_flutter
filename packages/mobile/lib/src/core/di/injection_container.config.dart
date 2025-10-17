@@ -14,6 +14,9 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../features/auth/presentation/bloc/auth_bloc.dart' as _i797;
+import '../../features/courses/bloc/course_bloc.dart' as _i85;
+import '../../features/dashboard/bloc/dashboard_bloc.dart' as _i690;
+import '../../features/quiz/bloc/quiz_bloc.dart' as _i966;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -28,6 +31,28 @@ extension GetItInjectableX on _i174.GetIt {
         registerUseCase: gh<_i107.RegisterUseCase>(),
         logoutUseCase: gh<_i107.LogoutUseCase>(),
         getCurrentUserUseCase: gh<_i107.GetCurrentUserUseCase>(),
+      ),
+    );
+    gh.factory<_i85.CourseBloc>(
+      () => _i85.CourseBloc(
+        gh<_i107.GetCoursesUseCase>(),
+        gh<_i107.GetCourseByIdUseCase>(),
+        gh<_i107.GetCourseLessonsUseCase>(),
+        gh<_i107.SearchCoursesUseCase>(),
+        gh<_i107.FilterCoursesUseCase>(),
+      ),
+    );
+    gh.factory<_i690.DashboardBloc>(
+      () => _i690.DashboardBloc(
+        gh<_i107.GetProfileUseCase>(),
+        gh<_i107.GetUserEnrollmentsUseCase>(),
+      ),
+    );
+    gh.factory<_i966.QuizBloc>(
+      () => _i966.QuizBloc(
+        gh<_i107.SubmitQuizUseCase>(),
+        gh<_i107.QuizRepository>(),
+        gh<_i107.GetCurrentUserUseCase>(),
       ),
     );
     return this;

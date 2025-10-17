@@ -166,41 +166,51 @@
 - ✅ **7.2.6** Add error handling and loading states
 - ✅ **7.2.7** Write auth/README.md for mobile
 - ✅ **7.2.8** Run build_runner to generate Freezed files
+- ✅ **7.2.9** Add @injectable annotation to AuthBloc for DI
+- ✅ **7.2.10** Fix common package exports (courses, quizzes, enrollment, profile)
+- ✅ **7.2.11** Fix UserRole ambiguous export issue
+- ✅ **7.2.12** Fix Material 3 theme errors (CardTheme, DialogTheme, TabBarTheme)
+- ✅ **7.2.13** Fix deprecated withOpacity() calls
 
 ---
 
-## Phase 8: Mobile Package - Course & Dashboard UI (Days 25-28) ⬜
+## Phase 8: Mobile Package - Course & Dashboard UI (Days 25-28) ✅
 
 ### Task 8.1: Course BLoC & UI
-- ⬜ **8.1.1** Create course_bloc.dart with events/states
-- ⬜ **8.1.2** Create course_list_page.dart
-- ⬜ **8.1.3** Create course_detail_page.dart with tabs (Lessons/Quizzes)
-- ⬜ **8.1.4** Create lesson_page.dart with video player
-- ⬜ **8.1.5** Create course_card.dart widget
-- ⬜ **8.1.6** Create course_filter.dart widget
-- ⬜ **8.1.7** Create lesson_video_player.dart widget
-- ⬜ **8.1.8** Write course/README.md for mobile
+- ✅ **8.1.1** Create course_bloc.dart with events/states (Freezed)
+- ✅ **8.1.2** Create course_list_page.dart
+- ✅ **8.1.3** Create course_detail_page.dart with tabs (Lessons/Quizzes)
+- ✅ **8.1.4** Create lesson_page.dart with video player
+- ✅ **8.1.5** Create course_card.dart widget
+- ✅ **8.1.6** Create course_filter.dart widget
+- ✅ **8.1.7** Create lesson_video_player.dart widget
+- ✅ **8.1.8** Write course/README.md for mobile
 
 ### Task 8.2: Dashboard BLoC & UI
-- ⬜ **8.2.1** Create dashboard_bloc.dart
-- ⬜ **8.2.2** Create dashboard_page.dart
-- ⬜ **8.2.3** Create progress_card.dart widget
-- ⬜ **8.2.4** Create enrolled_courses_list.dart widget
-- ⬜ **8.2.5** Show user statistics and recent activity
+- ✅ **8.2.1** Create dashboard_bloc.dart with Freezed
+- ✅ **8.2.2** Create dashboard_page.dart
+- ✅ **8.2.3** Create progress_card.dart widget
+- ✅ **8.2.4** Create enrolled_courses_list.dart widget
+- ✅ **8.2.5** Show user statistics and recent activity
+- ✅ **8.2.6** Update app router with all new pages
 
 ---
 
-## Phase 9: Mobile Package - Quiz UI (Days 29-31) ⬜
+## Phase 9: Mobile Package - Quiz UI (Days 29-31) ✅
 
 ### Task 9.1: Quiz BLoC & UI
-- ⬜ **9.1.1** Create quiz_bloc.dart with timer logic
-- ⬜ **9.1.2** Create quiz_page.dart
-- ⬜ **9.1.3** Create quiz_result_page.dart
-- ⬜ **9.1.4** Create question_widget.dart (multiple choice, true/false)
-- ⬜ **9.1.5** Create quiz_timer.dart widget
-- ⬜ **9.1.6** Implement quiz submission and scoring
-- ⬜ **9.1.7** Show correct answers after submission
-- ⬜ **9.1.8** Write quiz/README.md for mobile
+- ✅ **9.1.1** Create quiz_bloc.dart with timer logic
+- ✅ **9.1.2** Create quiz_page.dart
+- ✅ **9.1.3** Create quiz_result_page.dart
+- ✅ **9.1.4** Create question_widget.dart (multiple choice, true/false)
+- ✅ **9.1.5** Create quiz_timer.dart widget
+- ✅ **9.1.6** Implement quiz submission and scoring
+- ✅ **9.1.7** Show correct answers after submission
+- ✅ **9.1.8** Write quiz/README.md for mobile
+- ✅ **9.1.9** Create QuestionWithAnswers helper model
+- ✅ **9.1.10** Update QuizBloc to fetch questions and answers from repository
+- ✅ **9.1.11** Add navigation events (previous/next question)
+- ✅ **9.1.12** Fix timer tick event to avoid emit() warnings
 
 ---
 
@@ -369,7 +379,7 @@
 
 ## Progress Overview
 
-### Completed Phases: 7/15
+### Completed Phases: 9/15
 - ✅ Phase 1: Foundation
 - ✅ Phase 2: Core Layer
 - ✅ Phase 3: Auth Feature
@@ -377,8 +387,8 @@
 - ✅ Phase 5: Quiz Feature
 - ✅ Phase 6: Enrollment & Profile
 - ✅ Phase 7: Mobile Auth UI
-- ⬜ Phase 8: Mobile Course UI
-- ⬜ Phase 9: Mobile Quiz UI
+- ✅ Phase 8: Mobile Course & Dashboard UI
+- ✅ Phase 9: Mobile Quiz UI
 - ⬜ Phase 10: Web Auth UI
 - ⬜ Phase 11: Web Admin UI
 - ⬜ Phase 12: Web Dashboard UI
@@ -386,6 +396,39 @@
 - ⬜ Phase 14: Deployment
 - ⬜ Phase 15: Polish
 
-### Overall Progress: 51% (102/~200 tasks)
+### Overall Progress: 64% (139/~218 tasks)
+
+### Recent Updates (Latest Session - Phase 9 Complete)
+
+**Quiz Feature:**
+- ✅ Created QuizBloc with Freezed events/states and timer management
+- ✅ Created QuizPage with quiz intro, in-progress, and submitted screens
+- ✅ Created QuizResultPage with detailed answer review mode
+- ✅ Created QuestionWidget supporting multiple choice, single choice, and true/false
+- ✅ Created QuizTimer widget with color-coded countdown
+- ✅ Implemented quiz submission with automatic scoring
+- ✅ Created QuestionWithAnswers helper model to hold questions with their answers
+- ✅ Updated QuizBloc to fetch questions and answers from repository
+- ✅ Added navigation events for previous/next question
+- ✅ Fixed timer tick event to avoid bloc emit() warnings
+- ✅ Wrote comprehensive quiz/README.md for mobile
+
+**Router & Dependency Injection Fixes:**
+- ✅ Added BlocProvider wrappers to all routes in app_router.dart
+- ✅ Fixed ProviderNotFoundException by providing BLoCs from GetIt
+- ✅ Each route now creates its own BLoC instance from DI container
+- ✅ Updated router imports to include flutter_bloc and all BLoCs
+
+**Data Layer Fixes:**
+- ✅ Fixed CourseModel.fromSupabaseWithInstructor null-safety issues
+- ✅ Added null checks for duration, price, isPublished fields
+- ✅ Fixed type casting errors when database returns null values
+- ✅ Ensured proper default values for nullable integer fields
+
+**Architecture:**
+- ✅ Maintained clean architecture with proper separation of concerns
+- ✅ Used Freezed for type-safe events and states throughout
+- ✅ Followed BLoC pattern with proper event handlers
+- ✅ All code compiled with zero analyzer warnings
 
 

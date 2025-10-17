@@ -22,10 +22,13 @@ class UserModel with _$UserModel {
   const factory UserModel({
     required String id,
     required String email,
-    @JsonKey(name: 'full_name') String? fullName,
-    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    @JsonKey(name: 'full_name')
+    String? fullName,
+    @JsonKey(name: 'avatar_url')
+    String? avatarUrl,
     required UserRole role,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
   }) = _UserModel;
 
   const UserModel._();

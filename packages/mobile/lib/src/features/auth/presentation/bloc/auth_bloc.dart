@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:common/common.dart';
 
 import 'auth_event.dart';
@@ -11,9 +12,7 @@ import 'auth_state.dart';
 /// - Registration
 /// - Logout
 /// - Auth status checking
-///
-/// Note: This BLoC is manually registered in injection_container.dart
-/// because it depends on use cases from the common package
+@injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase _loginUseCase;
   final RegisterUseCase _registerUseCase;

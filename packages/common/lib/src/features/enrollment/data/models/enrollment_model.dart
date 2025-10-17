@@ -15,19 +15,33 @@ part 'enrollment_model.g.dart';
 class EnrollmentModel with _$EnrollmentModel {
   const factory EnrollmentModel({
     required String id,
-    @JsonKey(name: 'user_id') required String userId,
-    @JsonKey(name: 'course_id') required String courseId,
+    @JsonKey(name: 'user_id')
+    required String userId,
+    @JsonKey(name: 'course_id')
+    required String courseId,
     required EnrollmentStatus status,
-    @JsonKey(name: 'enrolled_at') required DateTime enrolledAt,
-    @JsonKey(name: 'completed_at') DateTime? completedAt,
-    @JsonKey(name: 'dropped_at') DateTime? droppedAt,
-    @Default(0) int progress,
-    @JsonKey(name: 'completed_lessons') @Default(0) int completedLessons,
-    @JsonKey(name: 'total_lessons') required int totalLessons,
-    @JsonKey(name: 'time_spent') @Default(0) int timeSpent,
-    @JsonKey(name: 'last_accessed_at') DateTime? lastAccessedAt,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'enrolled_at')
+    required DateTime enrolledAt,
+    @JsonKey(name: 'completed_at')
+    DateTime? completedAt,
+    @JsonKey(name: 'dropped_at')
+    DateTime? droppedAt,
+    @Default(0)
+    int progress,
+    @JsonKey(name: 'completed_lessons')
+    @Default(0)
+    int completedLessons,
+    @JsonKey(name: 'total_lessons')
+    required int totalLessons,
+    @JsonKey(name: 'time_spent')
+    @Default(0)
+    int timeSpent,
+    @JsonKey(name: 'last_accessed_at')
+    DateTime? lastAccessedAt,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
   }) = _EnrollmentModel;
 
   const EnrollmentModel._();

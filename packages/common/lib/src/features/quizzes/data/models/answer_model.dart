@@ -15,12 +15,18 @@ part 'answer_model.g.dart';
 class AnswerModel with _$AnswerModel {
   const factory AnswerModel({
     required String id,
-    @JsonKey(name: 'question_id') required String questionId,
-    @JsonKey(name: 'answer_text') required String answerText,
-    @JsonKey(name: 'is_correct') required bool isCorrect,
-    @JsonKey(name: 'order_index') required int orderIndex,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'question_id')
+    required String questionId,
+    @JsonKey(name: 'answer_text')
+    required String answerText,
+    @JsonKey(name: 'is_correct')
+    required bool isCorrect,
+    @JsonKey(name: 'order_index')
+    required int orderIndex,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
   }) = _AnswerModel;
 
   const AnswerModel._();

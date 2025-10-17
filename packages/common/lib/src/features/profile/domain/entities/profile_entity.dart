@@ -1,16 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'profile_entity.freezed.dart';
+import '../../../auth/domain/entities/user_entity.dart';
 
-/// User role enum
-enum UserRole {
-  @JsonValue('student')
-  student,
-  @JsonValue('instructor')
-  instructor,
-  @JsonValue('admin')
-  admin,
-}
+part 'profile_entity.freezed.dart';
 
 /// Domain entity for user profile
 ///

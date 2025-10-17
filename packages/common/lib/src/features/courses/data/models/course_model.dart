@@ -34,18 +34,29 @@ class CourseModel with _$CourseModel {
     required String title,
     required String description,
     required CourseCategory category,
-    @JsonKey(name: 'thumbnail_url') String? thumbnailUrl,
-    @JsonKey(name: 'instructor_id') required String instructorId,
-    @JsonKey(name: 'instructor_name') required String instructorName,
+    @JsonKey(name: 'thumbnail_url')
+    String? thumbnailUrl,
+    @JsonKey(name: 'instructor_id')
+    required String instructorId,
+    @JsonKey(name: 'instructor_name')
+    required String instructorName,
     required double price,
     required int duration,
     required CourseLevel level,
-    @JsonKey(name: 'is_published') required bool isPublished,
-    @JsonKey(name: 'enrollment_count') @Default(0) int enrollmentCount,
-    @Default(0.0) double rating,
-    @JsonKey(name: 'rating_count') @Default(0) int ratingCount,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'is_published')
+    required bool isPublished,
+    @JsonKey(name: 'enrollment_count')
+    @Default(0)
+    int enrollmentCount,
+    @Default(0.0)
+    double rating,
+    @JsonKey(name: 'rating_count')
+    @Default(0)
+    int ratingCount,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
   }) = _CourseModel;
 
   const CourseModel._();
@@ -148,13 +159,13 @@ class CourseModel with _$CourseModel {
       thumbnailUrl: json['thumbnail_url'] as String?,
       instructorId: json['instructor_id'] as String,
       instructorName: instructorName,
-      price: (json['price'] as num).toDouble(),
-      duration: json['duration'] as int,
+      price: ((json['price'] as num?) ?? 0).toDouble(),
+      duration: (json['duration'] as int?) ?? 0,
       level: _parseCourseLevel(json['level'] as String),
-      isPublished: json['is_published'] as bool,
-      enrollmentCount: json['enrollment_count'] as int? ?? 0,
+      isPublished: (json['is_published'] as bool?) ?? false,
+      enrollmentCount: (json['enrollment_count'] as int?) ?? 0,
       rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
-      ratingCount: json['rating_count'] as int? ?? 0,
+      ratingCount: (json['rating_count'] as int?) ?? 0,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
     );

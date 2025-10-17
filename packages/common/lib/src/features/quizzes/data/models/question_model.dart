@@ -15,15 +15,23 @@ part 'question_model.g.dart';
 class QuestionModel with _$QuestionModel {
   const factory QuestionModel({
     required String id,
-    @JsonKey(name: 'quiz_id') required String quizId,
-    @JsonKey(name: 'question_text') required String questionText,
-    @JsonKey(name: 'question_type') required QuestionType questionType,
-    @JsonKey(name: 'order_index') required int orderIndex,
-    @Default(1) int points,
+    @JsonKey(name: 'quiz_id')
+    required String quizId,
+    @JsonKey(name: 'question_text')
+    required String questionText,
+    @JsonKey(name: 'question_type')
+    required QuestionType questionType,
+    @JsonKey(name: 'order_index')
+    required int orderIndex,
+    @Default(1)
+    int points,
     String? explanation,
-    @JsonKey(name: 'image_url') String? imageUrl,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'image_url')
+    String? imageUrl,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
   }) = _QuestionModel;
 
   const QuestionModel._();

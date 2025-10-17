@@ -4,17 +4,13 @@
 export 'auth/auth.dart';
 
 // Course feature
-// TODO: Create course/course.dart export file
-// export 'course/course.dart';
+export 'courses/courses.dart';
 
 // Quiz feature
-// TODO: Create quiz/quiz.dart export file
-// export 'quiz/quiz.dart';
+export 'quizzes/quizzes.dart';
 
 // Enrollment feature
-// TODO: Create enrollment/enrollment.dart export file
-// export 'enrollment/enrollment.dart';
+export 'enrollment/enrollment.dart';
 
 // Profile feature
-// TODO: Create profile/profile.dart export file
-// export 'profile/profile.dart';
+export 'profile/profile.dart';

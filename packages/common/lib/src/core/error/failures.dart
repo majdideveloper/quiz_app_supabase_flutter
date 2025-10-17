@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 /// Base class for all failures in the application
 ///
 /// Failures represent expected errors that can occur during business logic execution.
-/// They are used with the Either<Failure, Success> pattern from dartz package.
+/// They are used with the `Either<Failure, Success>` pattern from dartz package.
 abstract class Failure extends Equatable {
   final String message;
   final String? code;

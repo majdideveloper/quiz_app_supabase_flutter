@@ -136,7 +136,7 @@ class AppTheme {
       ),
 
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: AppSpacing.elevationLow,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
@@ -148,7 +148,7 @@ class AppTheme {
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surfaceVariant.withOpacity(0.5),
+        fillColor: AppColors.surfaceVariant.withValues(alpha: 0.5),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.inputPadding,
           vertical: AppSpacing.inputPaddingVertical,
@@ -217,7 +217,7 @@ class AppTheme {
       ),
 
       // Dialog Theme
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         elevation: AppSpacing.elevationExtraHigh,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.dialogRadius),
@@ -278,7 +278,7 @@ class AppTheme {
       ),
 
       // Tab Bar Theme
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         labelColor: AppColors.primary,
         unselectedLabelColor: AppColors.onSurfaceVariant,
         labelStyle: AppTypography.labelLarge,
@@ -435,7 +435,7 @@ class AppTheme {
       ),
 
       // Card Theme
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: AppSpacing.elevationLow,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
@@ -447,7 +447,7 @@ class AppTheme {
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surfaceVariantDark.withOpacity(0.5),
+        fillColor: AppColors.surfaceVariantDark.withValues(alpha: 0.5),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.inputPadding,
           vertical: AppSpacing.inputPaddingVertical,
@@ -522,7 +522,7 @@ class AppTheme {
       ),
 
       // Dialog Theme
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         elevation: AppSpacing.elevationExtraHigh,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.dialogRadius),
@@ -587,7 +587,7 @@ class AppTheme {
       ),
 
       // Tab Bar Theme
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         labelColor: AppColors.primaryLight,
         unselectedLabelColor: AppColors.onSurfaceVariantDark,
         labelStyle: AppTypography.labelLarge,

@@ -15,18 +15,28 @@ part 'quiz_result_model.g.dart';
 class QuizResultModel with _$QuizResultModel {
   const factory QuizResultModel({
     required String id,
-    @JsonKey(name: 'quiz_id') required String quizId,
-    @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(name: 'quiz_id')
+    required String quizId,
+    @JsonKey(name: 'user_id')
+    required String userId,
     required double score,
-    @JsonKey(name: 'total_questions') required int totalQuestions,
-    @JsonKey(name: 'correct_answers') required int correctAnswers,
-    @JsonKey(name: 'incorrect_answers') required int incorrectAnswers,
-    @JsonKey(name: 'time_spent') required int timeSpent,
+    @JsonKey(name: 'total_questions')
+    required int totalQuestions,
+    @JsonKey(name: 'correct_answers')
+    required int correctAnswers,
+    @JsonKey(name: 'incorrect_answers')
+    required int incorrectAnswers,
+    @JsonKey(name: 'time_spent')
+    required int timeSpent,
     required bool passed,
-    @JsonKey(name: 'attempt_number') required int attemptNumber,
-    @JsonKey(name: 'started_at') required DateTime startedAt,
-    @JsonKey(name: 'submitted_at') required DateTime submittedAt,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'attempt_number')
+    required int attemptNumber,
+    @JsonKey(name: 'started_at')
+    required DateTime startedAt,
+    @JsonKey(name: 'submitted_at')
+    required DateTime submittedAt,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
   }) = _QuizResultModel;
 
   const QuizResultModel._();

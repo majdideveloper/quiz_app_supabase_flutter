@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:common/common.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
+import '../../features/auth/presentation/bloc/auth_bloc.dart';
+import '../../features/dashboard/pages/dashboard_page.dart';
+import '../../features/dashboard/bloc/dashboard_bloc.dart';
+import '../../features/courses/pages/course_list_page.dart';
+import '../../features/courses/pages/course_detail_page.dart';
+import '../../features/courses/pages/lesson_page.dart';
+import '../../features/courses/bloc/course_bloc.dart';
+import '../../features/quiz/pages/quiz_page.dart';
+import '../../features/quiz/bloc/quiz_bloc.dart';
 
 /// Application routes configuration using GoRouter
 ///
@@ -42,13 +53,19 @@ class AppRouter {
         GoRoute(
           path: loginPath,
           name: 'login',
-          builder: (context, state) => const LoginPage(),
+          builder: (context, state) => BlocProvider(
+            create: (_) => getIt<AuthBloc>(),
+            child: const LoginPage(),
+          ),
         ),
 
         GoRoute(
           path: registerPath,
           name: 'register',
-          builder: (context, state) => const RegisterPage(),
+          builder: (context, state) => BlocProvider(
+            create: (_) => getIt<AuthBloc>(),
+            child: const RegisterPage(),
+          ),
         ),
 
         // ========================================================================
@@ -58,7 +75,10 @@ class AppRouter {
         GoRoute(
           path: dashboardPath,
           name: 'dashboard',
-          builder: (context, state) => const Placeholder(), // TODO: Create DashboardPage
+          builder: (context, state) => BlocProvider(
+            create: (_) => getIt<DashboardBloc>(),
+            child: const DashboardPage(),
+          ),
         ),
 
         // ========================================================================
@@ -68,7 +88,10 @@ class AppRouter {
         GoRoute(
           path: coursesPath,
           name: 'courses',
-          builder: (context, state) => const Placeholder(), // TODO: Create CourseListPage
+          builder: (context, state) => BlocProvider(
+            create: (_) => getIt<CourseBloc>(),
+            child: const CourseListPage(),
+          ),
         ),
 
         GoRoute(
@@ -76,7 +99,10 @@ class AppRouter {
           name: 'courseDetail',
           builder: (context, state) {
             final courseId = state.pathParameters['id']!;
-            return Placeholder(); // TODO: Create CourseDetailPage(courseId: courseId)
+            return BlocProvider(
+              create: (_) => getIt<CourseBloc>(),
+              child: CourseDetailPage(courseId: courseId),
+            );
           },
         ),
 
@@ -86,7 +112,13 @@ class AppRouter {
           builder: (context, state) {
             final courseId = state.pathParameters['courseId']!;
             final lessonId = state.pathParameters['lessonId']!;
-            return Placeholder(); // TODO: Create LessonPage(courseId: courseId, lessonId: lessonId)
+            return BlocProvider(
+              create: (_) => getIt<CourseBloc>(),
+              child: LessonPage(
+                courseId: courseId,
+                lessonId: lessonId,
+              ),
+            );
           },
         ),
 
@@ -94,9 +126,11 @@ class AppRouter {
           path: quizPath,
           name: 'quiz',
           builder: (context, state) {
-            final courseId = state.pathParameters['courseId']!;
             final quizId = state.pathParameters['quizId']!;
-            return Placeholder(); // TODO: Create QuizPage(courseId: courseId, quizId: quizId)
+            return BlocProvider(
+              create: (_) => getIt<QuizBloc>(),
+              child: QuizPage(quizId: quizId),
+            );
           },
         ),
 

@@ -29,19 +29,29 @@ part 'lesson_model.g.dart';
 class LessonModel with _$LessonModel {
   const factory LessonModel({
     required String id,
-    @JsonKey(name: 'course_id') required String courseId,
+    @JsonKey(name: 'course_id')
+    required String courseId,
     required String title,
     required String description,
     required String content,
-    @JsonKey(name: 'video_url') String? videoUrl,
-    @JsonKey(name: 'video_thumbnail_url') String? videoThumbnailUrl,
-    @JsonKey(name: 'video_duration') int? videoDuration,
-    @JsonKey(name: 'order_index') required int orderIndex,
+    @JsonKey(name: 'video_url')
+    String? videoUrl,
+    @JsonKey(name: 'video_thumbnail_url')
+    String? videoThumbnailUrl,
+    @JsonKey(name: 'video_duration')
+    int? videoDuration,
+    @JsonKey(name: 'order_index')
+    required int orderIndex,
     required int duration,
-    @Default([]) List<String> resources,
-    @JsonKey(name: 'is_preview') @Default(false) bool isPreview,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @Default([])
+    List<String> resources,
+    @JsonKey(name: 'is_preview')
+    @Default(false)
+    bool isPreview,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
   }) = _LessonModel;
 
   const LessonModel._();

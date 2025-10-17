@@ -15,21 +15,38 @@ part 'quiz_model.g.dart';
 class QuizModel with _$QuizModel {
   const factory QuizModel({
     required String id,
-    @JsonKey(name: 'course_id') required String courseId,
-    @JsonKey(name: 'lesson_id') String? lessonId,
+    @JsonKey(name: 'course_id')
+    required String courseId,
+    @JsonKey(name: 'lesson_id')
+    String? lessonId,
     required String title,
     required String description,
-    @JsonKey(name: 'quiz_type') required QuizType quizType,
-    @JsonKey(name: 'passing_score') required int passingScore,
-    @JsonKey(name: 'time_limit') int? timeLimit,
-    @JsonKey(name: 'questions_count') required int questionsCount,
-    @JsonKey(name: 'max_attempts') int? maxAttempts,
-    @JsonKey(name: 'shuffle_questions') @Default(true) bool shuffleQuestions,
-    @JsonKey(name: 'shuffle_answers') @Default(true) bool shuffleAnswers,
-    @JsonKey(name: 'show_correct_answers') @Default(true) bool showCorrectAnswers,
-    @JsonKey(name: 'is_active') @Default(true) bool isActive,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'quiz_type')
+    required QuizType quizType,
+    @JsonKey(name: 'passing_score')
+    required int passingScore,
+    @JsonKey(name: 'time_limit')
+    int? timeLimit,
+    @JsonKey(name: 'questions_count')
+    required int questionsCount,
+    @JsonKey(name: 'max_attempts')
+    int? maxAttempts,
+    @JsonKey(name: 'shuffle_questions')
+    @Default(true)
+    bool shuffleQuestions,
+    @JsonKey(name: 'shuffle_answers')
+    @Default(true)
+    bool shuffleAnswers,
+    @JsonKey(name: 'show_correct_answers')
+    @Default(true)
+    bool showCorrectAnswers,
+    @JsonKey(name: 'is_active')
+    @Default(true)
+    bool isActive,
+    @JsonKey(name: 'created_at')
+    required DateTime createdAt,
+    @JsonKey(name: 'updated_at')
+    required DateTime updatedAt,
   }) = _QuizModel;
 
   const QuizModel._();

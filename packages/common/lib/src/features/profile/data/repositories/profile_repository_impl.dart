@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/utils/logger.dart';
+import '../../../auth/domain/entities/user_entity.dart';
 import '../../domain/entities/profile_entity.dart';
 import '../../domain/repositories/profile_repository.dart';
 import '../datasources/profile_remote_datasource.dart';

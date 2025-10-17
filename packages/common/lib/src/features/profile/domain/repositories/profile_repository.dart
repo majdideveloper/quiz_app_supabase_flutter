@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../../auth/domain/entities/user_entity.dart';
 import '../entities/profile_entity.dart';
 
 /// Repository interface for profile operations
