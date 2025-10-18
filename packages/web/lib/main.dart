@@ -11,7 +11,7 @@ void main() async {
   // Use path URL strategy (removes # from URLs)
   setPathUrlStrategy();
 
-  // Load environment variables
+  // Load environment variables (relative to assets directory)
   await dotenv.load(fileName: '.env.develop');
 
   // Initialize Supabase

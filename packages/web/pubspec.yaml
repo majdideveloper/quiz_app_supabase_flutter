@@ -46,6 +46,10 @@ dependencies:
   # Utilities
   equatable: ^2.0.5
 
+flutter:
+  assets:
+    - assets/.env.develop
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
