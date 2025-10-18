@@ -1,3 +1,5 @@
+import 'dart:io';
+
 /// Environment configuration for the application
 ///
 /// Manages environment-specific settings for develop, staging, and production
@@ -10,14 +12,39 @@ class EnvConfig {
     defaultValue: 'develop',
   );
 
-  /// Supabase project URL
-  static const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+  /// Supabase project URL (raw from environment)
+  static const _supabaseUrlRaw = String.fromEnvironment('SUPABASE_URL');
 
   /// Supabase anonymous key
   static const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
-  /// API base URL
-  static const apiUrl = String.fromEnvironment('API_URL');
+  /// API base URL (raw from environment)
+  static const _apiUrlRaw = String.fromEnvironment('API_URL');
+
+  /// Get platform-specific Supabase URL
+  ///
+  /// For local development:
+  /// - Android emulator uses 10.0.2.2 (special alias for host machine)
+  /// - iOS simulator uses 127.0.0.1 or localhost
+  static String get supabaseUrl {
+    if (isDevelopment && _supabaseUrlRaw.contains('10.0.2.2')) {
+      // Replace Android emulator IP with iOS-compatible localhost
+      if (Platform.isIOS) {
+        return _supabaseUrlRaw.replaceAll('10.0.2.2', '127.0.0.1');
+      }
+    }
+    return _supabaseUrlRaw;
+  }
+
+  /// Get platform-specific API URL
+  static String get apiUrl {
+    if (isDevelopment && _apiUrlRaw.contains('10.0.2.2')) {
+      if (Platform.isIOS) {
+        return _apiUrlRaw.replaceAll('10.0.2.2', '127.0.0.1');
+      }
+    }
+    return _apiUrlRaw;
+  }
 
   /// Check if running in development environment
   static bool get isDevelopment => environment == 'develop';
