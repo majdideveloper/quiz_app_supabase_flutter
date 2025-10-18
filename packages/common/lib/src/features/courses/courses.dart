@@ -15,3 +15,8 @@ export 'data/datasources/course_remote_datasource.dart';
 export 'data/models/course_model.dart';
 export 'data/models/lesson_model.dart';
 export 'data/repositories/course_repository_impl.dart';
+
+// Presentation - BLoC
+export 'presentation/bloc/course_bloc.dart';
+export 'presentation/bloc/course_event.dart';
+export 'presentation/bloc/course_state.dart';

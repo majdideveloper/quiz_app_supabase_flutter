@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:common/common.dart';
 
-import '../bloc/dashboard_bloc.dart';
-import '../bloc/dashboard_event.dart';
-import '../bloc/dashboard_state.dart';
 import '../widgets/progress_card.dart';
 import '../widgets/enrolled_courses_list.dart';
 
