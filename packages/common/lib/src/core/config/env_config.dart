@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 /// Environment configuration for the application
 ///
@@ -25,11 +26,11 @@ class EnvConfig {
   ///
   /// For local development:
   /// - Android emulator uses 10.0.2.2 (special alias for host machine)
-  /// - iOS simulator uses 127.0.0.1 or localhost
+  /// - iOS simulator and web use 127.0.0.1 or localhost
   static String get supabaseUrl {
     if (isDevelopment && _supabaseUrlRaw.contains('10.0.2.2')) {
-      // Replace Android emulator IP with iOS-compatible localhost
-      if (Platform.isIOS) {
+      // Replace Android emulator IP with localhost for iOS/web
+      if (kIsWeb || (!kIsWeb && Platform.isIOS)) {
         return _supabaseUrlRaw.replaceAll('10.0.2.2', '127.0.0.1');
       }
     }
@@ -39,7 +40,7 @@ class EnvConfig {
   /// Get platform-specific API URL
   static String get apiUrl {
     if (isDevelopment && _apiUrlRaw.contains('10.0.2.2')) {
-      if (Platform.isIOS) {
+      if (kIsWeb || (!kIsWeb && Platform.isIOS)) {
         return _apiUrlRaw.replaceAll('10.0.2.2', '127.0.0.1');
       }
     }
