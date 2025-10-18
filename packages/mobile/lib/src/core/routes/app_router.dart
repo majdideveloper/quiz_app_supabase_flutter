@@ -5,15 +5,11 @@ import 'package:common/common.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
-import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/dashboard/pages/dashboard_page.dart';
-import '../../features/dashboard/bloc/dashboard_bloc.dart';
 import '../../features/courses/pages/course_list_page.dart';
 import '../../features/courses/pages/course_detail_page.dart';
 import '../../features/courses/pages/lesson_page.dart';
-import '../../features/courses/bloc/course_bloc.dart';
 import '../../features/quiz/pages/quiz_page.dart';
-import '../../features/quiz/bloc/quiz_bloc.dart';
 
 /// Application routes configuration using GoRouter
 ///

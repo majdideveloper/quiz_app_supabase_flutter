@@ -24,3 +24,6 @@ export 'data/repositories/quiz_repository_impl.dart';
 export 'presentation/bloc/quiz_bloc.dart';
 export 'presentation/bloc/quiz_event.dart';
 export 'presentation/bloc/quiz_state.dart';
+
+// Presentation - Models
+export 'presentation/models/question_with_answers.dart';
