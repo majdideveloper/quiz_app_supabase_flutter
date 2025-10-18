@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:common/common.dart';
 
-import '../bloc/course_bloc.dart';
-import '../bloc/course_event.dart';
-import '../bloc/course_state.dart';
 
 /// Course detail page with tabs for lessons and quizzes
 ///
