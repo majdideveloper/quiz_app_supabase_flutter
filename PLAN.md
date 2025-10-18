@@ -259,30 +259,32 @@
 
 ---
 
-## Phase 11: Web Package - Setup & Auth UI (Days 35-38) ⬜
+## Phase 11: Web Package - Public Landing Page & Auth UI (Days 35-38) ✅
 
 ### Task 11.1: Web Package Setup
-- ⬜ **11.1.1** Create web package structure
-- ⬜ **11.1.2** Add dependencies (responsive_framework)
-- ⬜ **11.1.3** Reuse theme from common package (no duplication!)
-- ⬜ **11.1.4** Create core/routes/app_router.dart
-- ⬜ **11.1.5** Create core/di/injection_container.dart
-- ⬜ **11.1.6** Create main.dart and app.dart
-- ⬜ **11.1.7** Set up responsive breakpoints
+- ✅ **11.1.1** Create web package structure
+- ✅ **11.1.2** Add dependencies (responsive_framework, url_strategy, flutter_dotenv, supabase_flutter)
+- ✅ **11.1.3** Reuse theme from common package (no duplication!)
+- ✅ **11.1.4** Create core/routes/app_router.dart
+- ✅ **11.1.5** Reuse GetIt DI from common package (no duplication!)
+- ✅ **11.1.6** Create main.dart and app.dart
+- ✅ **11.1.7** Set up responsive breakpoints (mobile/tablet/desktop)
 
 ### Task 11.2: Auth UI (Web)
-- ⬜ **11.2.1** Reuse AuthBloc from common package
-- ⬜ **11.2.2** Create responsive login_page.dart
-- ⬜ **11.2.3** Create responsive register_page.dart
-- ⬜ **11.2.4** Create web-optimized forms
-- ⬜ **11.2.5** Add social auth buttons layout
+- ✅ **11.2.1** Reuse AuthBloc from common package
+- ✅ **11.2.2** Create responsive login_page.dart
+- ✅ **11.2.3** Create responsive register_page.dart
+- ✅ **11.2.4** Create web-optimized forms (auth_form_field.dart, auth_button.dart)
+- ✅ **11.2.5** Add social auth buttons layout
 
-### Task 11.3: Home Page
-- ⬜ **11.3.1** Create home_page.dart
-- ⬜ **11.3.2** Create hero_section.dart widget
-- ⬜ **11.3.3** Create feature_section.dart widget
-- ⬜ **11.3.4** Create testimonials.dart widget
-- ⬜ **11.3.5** Add navigation bar
+### Task 11.3: Public Landing Page
+- ✅ **11.3.1** Create home_page.dart
+- ✅ **11.3.2** Create hero_section.dart widget
+- ✅ **11.3.3** Create features_section.dart widget (feature_card.dart)
+- ✅ **11.3.4** Create testimonials_section.dart widget (testimonial_card.dart)
+- ✅ **11.3.5** Create course_preview_section.dart widget
+- ✅ **11.3.6** Add app_navbar.dart and app_footer.dart
+- ✅ **11.3.7** Create responsive_helper.dart utilities
 
 ---
 
@@ -432,7 +434,7 @@
 
 ## Progress Overview
 
-### Completed Phases: 10/16
+### Completed Phases: 11/16
 - ✅ Phase 1: Foundation
 - ✅ Phase 2: Core Layer
 - ✅ Phase 3: Auth Feature (Domain & Data)
@@ -443,16 +445,65 @@
 - ✅ Phase 8: Mobile Course & Dashboard UI
 - ✅ Phase 9: Mobile Quiz UI
 - ✅ Phase 10: BLoC Refactoring & Profile UI
-- ⬜ Phase 11: Web Auth UI
+- ✅ Phase 11: Web Public Landing Page & Auth UI
 - ⬜ Phase 12: Web Admin UI
 - ⬜ Phase 13: Web Dashboard & Profile UI
 - ⬜ Phase 14: Testing
 - ⬜ Phase 15: Deployment
 - ⬜ Phase 16: Polish
 
-### Overall Progress: 68% (181/~265 tasks)
+### Overall Progress: 71% (190/~265 tasks)
 
-### Recent Updates (Latest Session - Phase 10 Complete)
+### Recent Updates (Latest Session - Phase 11 Complete)
+
+**Phase 11: Web Package - Public Landing Page & Auth UI:**
+- ✅ Created web_app package with complete structure (17 new files + 3 modified)
+- ✅ Fixed package name conflict: renamed from "web" to "web_app"
+- ✅ Created main.dart with Supabase initialization and clean URL strategy (setPathUrlStrategy)
+- ✅ Created app.dart with responsive breakpoints (mobile: 0-600px, tablet: 601-1024px, desktop: 1025-1920px)
+- ✅ Created app_router.dart with GoRouter and public/protected route logic
+- ✅ Created responsive_helper.dart with breakpoint detection utilities
+- ✅ Reused all BLoCs from common package (AuthBloc, CourseBloc, QuizBloc, etc.) - zero duplication
+- ✅ Used package aliasing (`import 'package:common/common.dart' as common;`) to avoid naming conflicts
+
+**Public Landing Page:**
+- ✅ Created home_page.dart with full-screen scrollable sections
+- ✅ Created hero_section.dart with call-to-action buttons
+- ✅ Created features_section.dart with grid layout and feature_card.dart widget
+- ✅ Created course_preview_section.dart with course highlights
+- ✅ Created testimonials_section.dart with testimonial_card.dart widget
+- ✅ Created app_navbar.dart with responsive navigation and authentication buttons
+- ✅ Created app_footer.dart with links and social media
+
+**Auth UI (Web):**
+- ✅ Created login_page.dart with responsive form layout and BLoC integration
+- ✅ Created register_page.dart with responsive form layout
+- ✅ Created auth_form_field.dart for reusable form inputs
+- ✅ Created auth_button.dart for primary/secondary button styles
+- ✅ Added social auth buttons (Google, Facebook placeholders)
+- ✅ Implemented form validation and error handling
+
+**Bug Fixes & Polish:**
+- ✅ Fixed .env file loading: created assets directory and updated pubspec.yaml
+- ✅ Fixed Platform.isIOS error for web: updated EnvConfig to use kIsWeb flag
+- ✅ Fixed ambiguous imports with package aliasing
+- ✅ Fixed deprecated withOpacity() calls (replaced with withValues(alpha:))
+- ✅ Fixed AuthEvent method names (loginRequested, registerRequested)
+- ✅ Reduced flutter analyze warnings from 16 to 2
+
+**Git Commits:**
+- ✅ Commit 5a34173: "Add Phase 11 - Web package with public landing page and auth UI"
+- ✅ Commit 6a96bef: "Fix web package .env asset loading"
+- ✅ All work on feature/phase-11-web-landing-page branch
+
+**Technical Highlights:**
+- ✅ Complete code sharing: all business logic (BLoCs, use cases, repositories) from common package
+- ✅ Web-specific platform handling in EnvConfig for localhost/emulator IP mapping
+- ✅ Clean URLs without # using url_strategy package
+- ✅ Responsive design utilities for mobile/tablet/desktop breakpoints
+- ✅ Proper separation of public routes (landing page) and protected routes (dashboard)
+
+### Previous Updates (Phase 10 Complete)
 
 **BLoC Architecture Refactoring:**
 - ✅ Moved all BLoCs from mobile to common package for code sharing

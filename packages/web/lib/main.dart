@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:url_strategy/url_strategy.dart';
+import 'package:common/common.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'src/app.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Formation Métiers',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Web App - Coming Soon'),
-        ),
-      ),
-    );
-  }
+  // Use path URL strategy (removes # from URLs)
+  setPathUrlStrategy();
+
+  // Load environment variables (relative to assets directory)
+  await dotenv.load(fileName: '.env.develop');
+
+  // Initialize Supabase
+  await SupabaseClientWrapper.initialize();
+
+  // Initialize common package DI (BLoCs, use cases, repositories)
+  await configureDependencies();
+
+  runApp(const App());
 }
