@@ -62,10 +62,17 @@ import '../../features/profile/data/repositories/profile_repository_impl.dart'
     as _i334;
 import '../../features/profile/domain/repositories/profile_repository.dart'
     as _i894;
+import '../../features/profile/domain/usecases/delete_avatar_usecase.dart'
+    as _i381;
 import '../../features/profile/domain/usecases/get_profile_usecase.dart'
     as _i965;
+import '../../features/profile/domain/usecases/update_preferences_usecase.dart'
+    as _i90;
 import '../../features/profile/domain/usecases/update_profile_usecase.dart'
     as _i478;
+import '../../features/profile/domain/usecases/upload_avatar_usecase.dart'
+    as _i658;
+import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i469;
 import '../../features/quizzes/data/datasources/quiz_remote_datasource.dart'
     as _i413;
 import '../../features/quizzes/data/repositories/quiz_repository_impl.dart'
@@ -109,6 +116,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i965.GetProfileUseCase>(
       () => _i965.GetProfileUseCase(gh<_i894.ProfileRepository>()),
     );
+    gh.lazySingleton<_i381.DeleteAvatarUseCase>(
+      () => _i381.DeleteAvatarUseCase(gh<_i894.ProfileRepository>()),
+    );
+    gh.lazySingleton<_i658.UploadAvatarUseCase>(
+      () => _i658.UploadAvatarUseCase(gh<_i894.ProfileRepository>()),
+    );
+    gh.lazySingleton<_i90.UpdatePreferencesUseCase>(
+      () => _i90.UpdatePreferencesUseCase(gh<_i894.ProfileRepository>()),
+    );
     gh.lazySingleton<_i517.EnrollmentRemoteDataSource>(
       () => _i517.EnrollmentRemoteDataSourceImpl(gh<_i454.SupabaseClient>()),
     );
@@ -120,6 +136,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i749.CourseRepository>(
       () => _i657.CourseRepositoryImpl(gh<_i888.CourseRemoteDataSource>()),
+    );
+    gh.factory<_i469.ProfileBloc>(
+      () => _i469.ProfileBloc(
+        getProfileUseCase: gh<_i607.GetProfileUseCase>(),
+        updateProfileUseCase: gh<_i607.UpdateProfileUseCase>(),
+        uploadAvatarUseCase: gh<_i607.UploadAvatarUseCase>(),
+        deleteAvatarUseCase: gh<_i607.DeleteAvatarUseCase>(),
+        updatePreferencesUseCase: gh<_i607.UpdatePreferencesUseCase>(),
+      ),
     );
     gh.lazySingleton<_i149.EnrollmentRepository>(
       () => _i752.EnrollmentRepositoryImpl(

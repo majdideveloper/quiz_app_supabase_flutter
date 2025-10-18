@@ -10,6 +10,8 @@ import '../../features/courses/pages/course_list_page.dart';
 import '../../features/courses/pages/course_detail_page.dart';
 import '../../features/courses/pages/lesson_page.dart';
 import '../../features/quiz/pages/quiz_page.dart';
+import '../../features/profile/pages/profile_page.dart';
+import '../../features/profile/pages/edit_profile_page.dart';
 
 /// Application routes configuration using GoRouter
 ///
@@ -31,6 +33,7 @@ class AppRouter {
   static const String lessonPath = '/courses/:courseId/lessons/:lessonId';
   static const String quizPath = '/courses/:courseId/quizzes/:quizId';
   static const String profilePath = '/profile';
+  static const String editProfilePath = '/profile/edit';
 
   // ============================================================================
   // ROUTER CONFIGURATION
@@ -131,13 +134,28 @@ class AppRouter {
         ),
 
         // ========================================================================
-        // PROFILE ROUTE
+        // PROFILE ROUTES
         // ========================================================================
 
         GoRoute(
           path: profilePath,
           name: 'profile',
-          builder: (context, state) => const Placeholder(), // TODO: Create ProfilePage
+          builder: (context, state) => BlocProvider(
+            create: (_) => getIt<ProfileBloc>(),
+            child: const ProfilePage(),
+          ),
+        ),
+
+        GoRoute(
+          path: editProfilePath,
+          name: 'editProfile',
+          builder: (context, state) {
+            final profile = state.extra as ProfileEntity;
+            return BlocProvider.value(
+              value: getIt<ProfileBloc>(),
+              child: EditProfilePage(profile: profile),
+            );
+          },
         ),
       ],
 
