@@ -27,12 +27,9 @@ mixin _$QuizEntity {
   int? get timeLimit => throw _privateConstructorUsedError;
   int get questionsCount => throw _privateConstructorUsedError;
   int? get maxAttempts => throw _privateConstructorUsedError;
-  bool get shuffleQuestions => throw _privateConstructorUsedError;
-  bool get shuffleAnswers => throw _privateConstructorUsedError;
-  bool get showCorrectAnswers => throw _privateConstructorUsedError;
-  bool get isActive => throw _privateConstructorUsedError;
+  int get orderIndex => throw _privateConstructorUsedError;
+  bool get isRequired => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   /// Create a copy of QuizEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -59,12 +56,9 @@ abstract class $QuizEntityCopyWith<$Res> {
     int? timeLimit,
     int questionsCount,
     int? maxAttempts,
-    bool shuffleQuestions,
-    bool shuffleAnswers,
-    bool showCorrectAnswers,
-    bool isActive,
+    int orderIndex,
+    bool isRequired,
     DateTime createdAt,
-    DateTime updatedAt,
   });
 }
 
@@ -93,12 +87,9 @@ class _$QuizEntityCopyWithImpl<$Res, $Val extends QuizEntity>
     Object? timeLimit = freezed,
     Object? questionsCount = null,
     Object? maxAttempts = freezed,
-    Object? shuffleQuestions = null,
-    Object? shuffleAnswers = null,
-    Object? showCorrectAnswers = null,
-    Object? isActive = null,
+    Object? orderIndex = null,
+    Object? isRequired = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(
       _value.copyWith(
@@ -152,35 +143,20 @@ class _$QuizEntityCopyWithImpl<$Res, $Val extends QuizEntity>
                     ? _value.maxAttempts
                     : maxAttempts // ignore: cast_nullable_to_non_nullable
                         as int?,
-            shuffleQuestions:
-                null == shuffleQuestions
-                    ? _value.shuffleQuestions
-                    : shuffleQuestions // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            shuffleAnswers:
-                null == shuffleAnswers
-                    ? _value.shuffleAnswers
-                    : shuffleAnswers // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            showCorrectAnswers:
-                null == showCorrectAnswers
-                    ? _value.showCorrectAnswers
-                    : showCorrectAnswers // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isActive:
-                null == isActive
-                    ? _value.isActive
-                    : isActive // ignore: cast_nullable_to_non_nullable
+            orderIndex:
+                null == orderIndex
+                    ? _value.orderIndex
+                    : orderIndex // ignore: cast_nullable_to_non_nullable
+                        as int,
+            isRequired:
+                null == isRequired
+                    ? _value.isRequired
+                    : isRequired // ignore: cast_nullable_to_non_nullable
                         as bool,
             createdAt:
                 null == createdAt
                     ? _value.createdAt
                     : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
                         as DateTime,
           )
           as $Val,
@@ -208,12 +184,9 @@ abstract class _$$QuizEntityImplCopyWith<$Res>
     int? timeLimit,
     int questionsCount,
     int? maxAttempts,
-    bool shuffleQuestions,
-    bool shuffleAnswers,
-    bool showCorrectAnswers,
-    bool isActive,
+    int orderIndex,
+    bool isRequired,
     DateTime createdAt,
-    DateTime updatedAt,
   });
 }
 
@@ -241,12 +214,9 @@ class __$$QuizEntityImplCopyWithImpl<$Res>
     Object? timeLimit = freezed,
     Object? questionsCount = null,
     Object? maxAttempts = freezed,
-    Object? shuffleQuestions = null,
-    Object? shuffleAnswers = null,
-    Object? showCorrectAnswers = null,
-    Object? isActive = null,
+    Object? orderIndex = null,
+    Object? isRequired = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(
       _$QuizEntityImpl(
@@ -300,35 +270,20 @@ class __$$QuizEntityImplCopyWithImpl<$Res>
                 ? _value.maxAttempts
                 : maxAttempts // ignore: cast_nullable_to_non_nullable
                     as int?,
-        shuffleQuestions:
-            null == shuffleQuestions
-                ? _value.shuffleQuestions
-                : shuffleQuestions // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        shuffleAnswers:
-            null == shuffleAnswers
-                ? _value.shuffleAnswers
-                : shuffleAnswers // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        showCorrectAnswers:
-            null == showCorrectAnswers
-                ? _value.showCorrectAnswers
-                : showCorrectAnswers // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isActive:
-            null == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
+        orderIndex:
+            null == orderIndex
+                ? _value.orderIndex
+                : orderIndex // ignore: cast_nullable_to_non_nullable
+                    as int,
+        isRequired:
+            null == isRequired
+                ? _value.isRequired
+                : isRequired // ignore: cast_nullable_to_non_nullable
                     as bool,
         createdAt:
             null == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
                     as DateTime,
       ),
     );
@@ -343,18 +298,15 @@ class _$QuizEntityImpl extends _QuizEntity {
     required this.courseId,
     this.lessonId,
     required this.title,
-    required this.description,
-    required this.quizType,
-    required this.passingScore,
+    this.description = '',
+    this.quizType = QuizType.lesson,
+    this.passingScore = 70,
     this.timeLimit,
-    required this.questionsCount,
+    this.questionsCount = 0,
     this.maxAttempts,
-    this.shuffleQuestions = true,
-    this.shuffleAnswers = true,
-    this.showCorrectAnswers = true,
-    this.isActive = true,
+    this.orderIndex = 0,
+    this.isRequired = true,
     required this.createdAt,
-    required this.updatedAt,
   }) : super._();
 
   @override
@@ -366,37 +318,33 @@ class _$QuizEntityImpl extends _QuizEntity {
   @override
   final String title;
   @override
+  @JsonKey()
   final String description;
   @override
+  @JsonKey()
   final QuizType quizType;
   @override
+  @JsonKey()
   final int passingScore;
   @override
   final int? timeLimit;
   @override
+  @JsonKey()
   final int questionsCount;
   @override
   final int? maxAttempts;
   @override
   @JsonKey()
-  final bool shuffleQuestions;
+  final int orderIndex;
   @override
   @JsonKey()
-  final bool shuffleAnswers;
-  @override
-  @JsonKey()
-  final bool showCorrectAnswers;
-  @override
-  @JsonKey()
-  final bool isActive;
+  final bool isRequired;
   @override
   final DateTime createdAt;
-  @override
-  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'QuizEntity(id: $id, courseId: $courseId, lessonId: $lessonId, title: $title, description: $description, quizType: $quizType, passingScore: $passingScore, timeLimit: $timeLimit, questionsCount: $questionsCount, maxAttempts: $maxAttempts, shuffleQuestions: $shuffleQuestions, shuffleAnswers: $shuffleAnswers, showCorrectAnswers: $showCorrectAnswers, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'QuizEntity(id: $id, courseId: $courseId, lessonId: $lessonId, title: $title, description: $description, quizType: $quizType, passingScore: $passingScore, timeLimit: $timeLimit, questionsCount: $questionsCount, maxAttempts: $maxAttempts, orderIndex: $orderIndex, isRequired: $isRequired, createdAt: $createdAt)';
   }
 
   @override
@@ -422,18 +370,12 @@ class _$QuizEntityImpl extends _QuizEntity {
                 other.questionsCount == questionsCount) &&
             (identical(other.maxAttempts, maxAttempts) ||
                 other.maxAttempts == maxAttempts) &&
-            (identical(other.shuffleQuestions, shuffleQuestions) ||
-                other.shuffleQuestions == shuffleQuestions) &&
-            (identical(other.shuffleAnswers, shuffleAnswers) ||
-                other.shuffleAnswers == shuffleAnswers) &&
-            (identical(other.showCorrectAnswers, showCorrectAnswers) ||
-                other.showCorrectAnswers == showCorrectAnswers) &&
-            (identical(other.isActive, isActive) ||
-                other.isActive == isActive) &&
+            (identical(other.orderIndex, orderIndex) ||
+                other.orderIndex == orderIndex) &&
+            (identical(other.isRequired, isRequired) ||
+                other.isRequired == isRequired) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.createdAt == createdAt));
   }
 
   @override
@@ -449,12 +391,9 @@ class _$QuizEntityImpl extends _QuizEntity {
     timeLimit,
     questionsCount,
     maxAttempts,
-    shuffleQuestions,
-    shuffleAnswers,
-    showCorrectAnswers,
-    isActive,
+    orderIndex,
+    isRequired,
     createdAt,
-    updatedAt,
   );
 
   /// Create a copy of QuizEntity
@@ -472,18 +411,15 @@ abstract class _QuizEntity extends QuizEntity {
     required final String courseId,
     final String? lessonId,
     required final String title,
-    required final String description,
-    required final QuizType quizType,
-    required final int passingScore,
+    final String description,
+    final QuizType quizType,
+    final int passingScore,
     final int? timeLimit,
-    required final int questionsCount,
+    final int questionsCount,
     final int? maxAttempts,
-    final bool shuffleQuestions,
-    final bool shuffleAnswers,
-    final bool showCorrectAnswers,
-    final bool isActive,
+    final int orderIndex,
+    final bool isRequired,
     required final DateTime createdAt,
-    required final DateTime updatedAt,
   }) = _$QuizEntityImpl;
   const _QuizEntity._() : super._();
 
@@ -508,17 +444,11 @@ abstract class _QuizEntity extends QuizEntity {
   @override
   int? get maxAttempts;
   @override
-  bool get shuffleQuestions;
+  int get orderIndex;
   @override
-  bool get shuffleAnswers;
-  @override
-  bool get showCorrectAnswers;
-  @override
-  bool get isActive;
+  bool get isRequired;
   @override
   DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
 
   /// Create a copy of QuizEntity
   /// with the given fields replaced by the non-null parameter values.

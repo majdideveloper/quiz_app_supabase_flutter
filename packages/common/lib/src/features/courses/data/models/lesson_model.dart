@@ -33,7 +33,8 @@ class LessonModel with _$LessonModel {
     required String courseId,
     required String title,
     required String description,
-    required String content,
+    @Default('')
+    String content,
     @JsonKey(name: 'video_url')
     String? videoUrl,
     @JsonKey(name: 'video_thumbnail_url')
@@ -42,7 +43,8 @@ class LessonModel with _$LessonModel {
     int? videoDuration,
     @JsonKey(name: 'order_index')
     required int orderIndex,
-    required int duration,
+    @JsonKey(name: 'duration_minutes')
+    int? duration,
     @Default([])
     List<String> resources,
     @JsonKey(name: 'is_preview')
@@ -50,8 +52,6 @@ class LessonModel with _$LessonModel {
     bool isPreview,
     @JsonKey(name: 'created_at')
     required DateTime createdAt,
-    @JsonKey(name: 'updated_at')
-    required DateTime updatedAt,
   }) = _LessonModel;
 
   const LessonModel._();
@@ -99,7 +99,7 @@ class LessonModel with _$LessonModel {
       resources: resources,
       isPreview: isPreview,
       createdAt: createdAt,
-      updatedAt: updatedAt,
+      updatedAt: createdAt, // Use createdAt as updatedAt since we removed it
     );
   }
 
@@ -122,7 +122,6 @@ class LessonModel with _$LessonModel {
       resources: entity.resources,
       isPreview: entity.isPreview,
       createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
     );
   }
 }

@@ -14,6 +14,11 @@ class QuizState with _$QuizState {
   /// Loading state
   const factory QuizState.loading() = QuizLoading;
 
+  /// Quizzes loaded for a course
+  const factory QuizState.quizzesLoaded({
+    required List<QuizEntity> quizzes,
+  }) = QuizzesLoaded;
+
   /// Quiz loaded and ready to start
   const factory QuizState.quizLoaded({
     required QuizEntity quiz,

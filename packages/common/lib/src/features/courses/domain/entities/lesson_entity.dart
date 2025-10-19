@@ -29,12 +29,12 @@ class LessonEntity with _$LessonEntity {
     required String courseId,
     required String title,
     required String description,
-    required String content,
+    @Default('') String content,
     String? videoUrl,
     String? videoThumbnailUrl,
     int? videoDuration,
     required int orderIndex,
-    required int duration,
+    int? duration,
     @Default([]) List<String> resources,
     @Default(false) bool isPreview,
     required DateTime createdAt,
@@ -51,11 +51,12 @@ class LessonEntity with _$LessonEntity {
 
   /// Get formatted duration (e.g., "15 min" or "1h 30min")
   String get formattedDuration {
-    if (duration < 60) {
+    if (duration == null) return '-';
+    if (duration! < 60) {
       return '$duration min';
     }
-    final hours = duration ~/ 60;
-    final minutes = duration % 60;
+    final hours = duration! ~/ 60;
+    final minutes = duration! % 60;
     if (minutes == 0) {
       return '$hours h';
     }

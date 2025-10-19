@@ -21,6 +21,7 @@ mixin _$QuizState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<QuizEntity> quizzes) quizzesLoaded,
     required TResult Function(
       QuizEntity quiz,
       List<QuestionWithAnswers> questions,
@@ -48,6 +49,7 @@ mixin _$QuizState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult? Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult? Function(
@@ -72,6 +74,7 @@ mixin _$QuizState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult Function(
@@ -97,6 +100,7 @@ mixin _$QuizState {
   TResult map<TResult extends Object?>({
     required TResult Function(QuizInitial value) initial,
     required TResult Function(QuizLoading value) loading,
+    required TResult Function(QuizzesLoaded value) quizzesLoaded,
     required TResult Function(QuizLoaded value) quizLoaded,
     required TResult Function(QuizInProgress value) quizInProgress,
     required TResult Function(QuizSubmitted value) quizSubmitted,
@@ -106,6 +110,7 @@ mixin _$QuizState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuizInitial value)? initial,
     TResult? Function(QuizLoading value)? loading,
+    TResult? Function(QuizzesLoaded value)? quizzesLoaded,
     TResult? Function(QuizLoaded value)? quizLoaded,
     TResult? Function(QuizInProgress value)? quizInProgress,
     TResult? Function(QuizSubmitted value)? quizSubmitted,
@@ -115,6 +120,7 @@ mixin _$QuizState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuizInitial value)? initial,
     TResult Function(QuizLoading value)? loading,
+    TResult Function(QuizzesLoaded value)? quizzesLoaded,
     TResult Function(QuizLoaded value)? quizLoaded,
     TResult Function(QuizInProgress value)? quizInProgress,
     TResult Function(QuizSubmitted value)? quizSubmitted,
@@ -188,6 +194,7 @@ class _$QuizInitialImpl implements QuizInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<QuizEntity> quizzes) quizzesLoaded,
     required TResult Function(
       QuizEntity quiz,
       List<QuestionWithAnswers> questions,
@@ -219,6 +226,7 @@ class _$QuizInitialImpl implements QuizInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult? Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult? Function(
@@ -247,6 +255,7 @@ class _$QuizInitialImpl implements QuizInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult Function(
@@ -279,6 +288,7 @@ class _$QuizInitialImpl implements QuizInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(QuizInitial value) initial,
     required TResult Function(QuizLoading value) loading,
+    required TResult Function(QuizzesLoaded value) quizzesLoaded,
     required TResult Function(QuizLoaded value) quizLoaded,
     required TResult Function(QuizInProgress value) quizInProgress,
     required TResult Function(QuizSubmitted value) quizSubmitted,
@@ -292,6 +302,7 @@ class _$QuizInitialImpl implements QuizInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuizInitial value)? initial,
     TResult? Function(QuizLoading value)? loading,
+    TResult? Function(QuizzesLoaded value)? quizzesLoaded,
     TResult? Function(QuizLoaded value)? quizLoaded,
     TResult? Function(QuizInProgress value)? quizInProgress,
     TResult? Function(QuizSubmitted value)? quizSubmitted,
@@ -305,6 +316,7 @@ class _$QuizInitialImpl implements QuizInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuizInitial value)? initial,
     TResult Function(QuizLoading value)? loading,
+    TResult Function(QuizzesLoaded value)? quizzesLoaded,
     TResult Function(QuizLoaded value)? quizLoaded,
     TResult Function(QuizInProgress value)? quizInProgress,
     TResult Function(QuizSubmitted value)? quizSubmitted,
@@ -367,6 +379,7 @@ class _$QuizLoadingImpl implements QuizLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<QuizEntity> quizzes) quizzesLoaded,
     required TResult Function(
       QuizEntity quiz,
       List<QuestionWithAnswers> questions,
@@ -398,6 +411,7 @@ class _$QuizLoadingImpl implements QuizLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult? Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult? Function(
@@ -426,6 +440,7 @@ class _$QuizLoadingImpl implements QuizLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult Function(
@@ -458,6 +473,7 @@ class _$QuizLoadingImpl implements QuizLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(QuizInitial value) initial,
     required TResult Function(QuizLoading value) loading,
+    required TResult Function(QuizzesLoaded value) quizzesLoaded,
     required TResult Function(QuizLoaded value) quizLoaded,
     required TResult Function(QuizInProgress value) quizInProgress,
     required TResult Function(QuizSubmitted value) quizSubmitted,
@@ -471,6 +487,7 @@ class _$QuizLoadingImpl implements QuizLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuizInitial value)? initial,
     TResult? Function(QuizLoading value)? loading,
+    TResult? Function(QuizzesLoaded value)? quizzesLoaded,
     TResult? Function(QuizLoaded value)? quizLoaded,
     TResult? Function(QuizInProgress value)? quizInProgress,
     TResult? Function(QuizSubmitted value)? quizSubmitted,
@@ -484,6 +501,7 @@ class _$QuizLoadingImpl implements QuizLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuizInitial value)? initial,
     TResult Function(QuizLoading value)? loading,
+    TResult Function(QuizzesLoaded value)? quizzesLoaded,
     TResult Function(QuizLoaded value)? quizLoaded,
     TResult Function(QuizInProgress value)? quizInProgress,
     TResult Function(QuizSubmitted value)? quizSubmitted,
@@ -499,6 +517,235 @@ class _$QuizLoadingImpl implements QuizLoading {
 
 abstract class QuizLoading implements QuizState {
   const factory QuizLoading() = _$QuizLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$QuizzesLoadedImplCopyWith<$Res> {
+  factory _$$QuizzesLoadedImplCopyWith(
+    _$QuizzesLoadedImpl value,
+    $Res Function(_$QuizzesLoadedImpl) then,
+  ) = __$$QuizzesLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<QuizEntity> quizzes});
+}
+
+/// @nodoc
+class __$$QuizzesLoadedImplCopyWithImpl<$Res>
+    extends _$QuizStateCopyWithImpl<$Res, _$QuizzesLoadedImpl>
+    implements _$$QuizzesLoadedImplCopyWith<$Res> {
+  __$$QuizzesLoadedImplCopyWithImpl(
+    _$QuizzesLoadedImpl _value,
+    $Res Function(_$QuizzesLoadedImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of QuizState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? quizzes = null}) {
+    return _then(
+      _$QuizzesLoadedImpl(
+        quizzes:
+            null == quizzes
+                ? _value._quizzes
+                : quizzes // ignore: cast_nullable_to_non_nullable
+                    as List<QuizEntity>,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$QuizzesLoadedImpl implements QuizzesLoaded {
+  const _$QuizzesLoadedImpl({required final List<QuizEntity> quizzes})
+    : _quizzes = quizzes;
+
+  final List<QuizEntity> _quizzes;
+  @override
+  List<QuizEntity> get quizzes {
+    if (_quizzes is EqualUnmodifiableListView) return _quizzes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_quizzes);
+  }
+
+  @override
+  String toString() {
+    return 'QuizState.quizzesLoaded(quizzes: $quizzes)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuizzesLoadedImpl &&
+            const DeepCollectionEquality().equals(other._quizzes, _quizzes));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_quizzes));
+
+  /// Create a copy of QuizState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$QuizzesLoadedImplCopyWith<_$QuizzesLoadedImpl> get copyWith =>
+      __$$QuizzesLoadedImplCopyWithImpl<_$QuizzesLoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<QuizEntity> quizzes) quizzesLoaded,
+    required TResult Function(
+      QuizEntity quiz,
+      List<QuestionWithAnswers> questions,
+    )
+    quizLoaded,
+    required TResult Function(
+      QuizEntity quiz,
+      List<QuestionWithAnswers> questions,
+      Map<String, List<String>> answers,
+      int currentQuestionIndex,
+      DateTime startTime,
+      int? timeRemaining,
+    )
+    quizInProgress,
+    required TResult Function(
+      QuizResultEntity result,
+      QuizEntity quiz,
+      List<QuestionWithAnswers> questions,
+      Map<String, List<String>> userAnswers,
+    )
+    quizSubmitted,
+    required TResult Function(String message) error,
+  }) {
+    return quizzesLoaded(quizzes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<QuizEntity> quizzes)? quizzesLoaded,
+    TResult? Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
+    quizLoaded,
+    TResult? Function(
+      QuizEntity quiz,
+      List<QuestionWithAnswers> questions,
+      Map<String, List<String>> answers,
+      int currentQuestionIndex,
+      DateTime startTime,
+      int? timeRemaining,
+    )?
+    quizInProgress,
+    TResult? Function(
+      QuizResultEntity result,
+      QuizEntity quiz,
+      List<QuestionWithAnswers> questions,
+      Map<String, List<String>> userAnswers,
+    )?
+    quizSubmitted,
+    TResult? Function(String message)? error,
+  }) {
+    return quizzesLoaded?.call(quizzes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<QuizEntity> quizzes)? quizzesLoaded,
+    TResult Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
+    quizLoaded,
+    TResult Function(
+      QuizEntity quiz,
+      List<QuestionWithAnswers> questions,
+      Map<String, List<String>> answers,
+      int currentQuestionIndex,
+      DateTime startTime,
+      int? timeRemaining,
+    )?
+    quizInProgress,
+    TResult Function(
+      QuizResultEntity result,
+      QuizEntity quiz,
+      List<QuestionWithAnswers> questions,
+      Map<String, List<String>> userAnswers,
+    )?
+    quizSubmitted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (quizzesLoaded != null) {
+      return quizzesLoaded(quizzes);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuizInitial value) initial,
+    required TResult Function(QuizLoading value) loading,
+    required TResult Function(QuizzesLoaded value) quizzesLoaded,
+    required TResult Function(QuizLoaded value) quizLoaded,
+    required TResult Function(QuizInProgress value) quizInProgress,
+    required TResult Function(QuizSubmitted value) quizSubmitted,
+    required TResult Function(QuizError value) error,
+  }) {
+    return quizzesLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(QuizInitial value)? initial,
+    TResult? Function(QuizLoading value)? loading,
+    TResult? Function(QuizzesLoaded value)? quizzesLoaded,
+    TResult? Function(QuizLoaded value)? quizLoaded,
+    TResult? Function(QuizInProgress value)? quizInProgress,
+    TResult? Function(QuizSubmitted value)? quizSubmitted,
+    TResult? Function(QuizError value)? error,
+  }) {
+    return quizzesLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuizInitial value)? initial,
+    TResult Function(QuizLoading value)? loading,
+    TResult Function(QuizzesLoaded value)? quizzesLoaded,
+    TResult Function(QuizLoaded value)? quizLoaded,
+    TResult Function(QuizInProgress value)? quizInProgress,
+    TResult Function(QuizSubmitted value)? quizSubmitted,
+    TResult Function(QuizError value)? error,
+    required TResult orElse(),
+  }) {
+    if (quizzesLoaded != null) {
+      return quizzesLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuizzesLoaded implements QuizState {
+  const factory QuizzesLoaded({required final List<QuizEntity> quizzes}) =
+      _$QuizzesLoadedImpl;
+
+  List<QuizEntity> get quizzes;
+
+  /// Create a copy of QuizState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$QuizzesLoadedImplCopyWith<_$QuizzesLoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -609,6 +856,7 @@ class _$QuizLoadedImpl implements QuizLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<QuizEntity> quizzes) quizzesLoaded,
     required TResult Function(
       QuizEntity quiz,
       List<QuestionWithAnswers> questions,
@@ -640,6 +888,7 @@ class _$QuizLoadedImpl implements QuizLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult? Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult? Function(
@@ -668,6 +917,7 @@ class _$QuizLoadedImpl implements QuizLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult Function(
@@ -700,6 +950,7 @@ class _$QuizLoadedImpl implements QuizLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(QuizInitial value) initial,
     required TResult Function(QuizLoading value) loading,
+    required TResult Function(QuizzesLoaded value) quizzesLoaded,
     required TResult Function(QuizLoaded value) quizLoaded,
     required TResult Function(QuizInProgress value) quizInProgress,
     required TResult Function(QuizSubmitted value) quizSubmitted,
@@ -713,6 +964,7 @@ class _$QuizLoadedImpl implements QuizLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuizInitial value)? initial,
     TResult? Function(QuizLoading value)? loading,
+    TResult? Function(QuizzesLoaded value)? quizzesLoaded,
     TResult? Function(QuizLoaded value)? quizLoaded,
     TResult? Function(QuizInProgress value)? quizInProgress,
     TResult? Function(QuizSubmitted value)? quizSubmitted,
@@ -726,6 +978,7 @@ class _$QuizLoadedImpl implements QuizLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuizInitial value)? initial,
     TResult Function(QuizLoading value)? loading,
+    TResult Function(QuizzesLoaded value)? quizzesLoaded,
     TResult Function(QuizLoaded value)? quizLoaded,
     TResult Function(QuizInProgress value)? quizInProgress,
     TResult Function(QuizSubmitted value)? quizSubmitted,
@@ -931,6 +1184,7 @@ class _$QuizInProgressImpl implements QuizInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<QuizEntity> quizzes) quizzesLoaded,
     required TResult Function(
       QuizEntity quiz,
       List<QuestionWithAnswers> questions,
@@ -969,6 +1223,7 @@ class _$QuizInProgressImpl implements QuizInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult? Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult? Function(
@@ -1004,6 +1259,7 @@ class _$QuizInProgressImpl implements QuizInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult Function(
@@ -1043,6 +1299,7 @@ class _$QuizInProgressImpl implements QuizInProgress {
   TResult map<TResult extends Object?>({
     required TResult Function(QuizInitial value) initial,
     required TResult Function(QuizLoading value) loading,
+    required TResult Function(QuizzesLoaded value) quizzesLoaded,
     required TResult Function(QuizLoaded value) quizLoaded,
     required TResult Function(QuizInProgress value) quizInProgress,
     required TResult Function(QuizSubmitted value) quizSubmitted,
@@ -1056,6 +1313,7 @@ class _$QuizInProgressImpl implements QuizInProgress {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuizInitial value)? initial,
     TResult? Function(QuizLoading value)? loading,
+    TResult? Function(QuizzesLoaded value)? quizzesLoaded,
     TResult? Function(QuizLoaded value)? quizLoaded,
     TResult? Function(QuizInProgress value)? quizInProgress,
     TResult? Function(QuizSubmitted value)? quizSubmitted,
@@ -1069,6 +1327,7 @@ class _$QuizInProgressImpl implements QuizInProgress {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuizInitial value)? initial,
     TResult Function(QuizLoading value)? loading,
+    TResult Function(QuizzesLoaded value)? quizzesLoaded,
     TResult Function(QuizLoaded value)? quizLoaded,
     TResult Function(QuizInProgress value)? quizInProgress,
     TResult Function(QuizSubmitted value)? quizSubmitted,
@@ -1265,6 +1524,7 @@ class _$QuizSubmittedImpl implements QuizSubmitted {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<QuizEntity> quizzes) quizzesLoaded,
     required TResult Function(
       QuizEntity quiz,
       List<QuestionWithAnswers> questions,
@@ -1296,6 +1556,7 @@ class _$QuizSubmittedImpl implements QuizSubmitted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult? Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult? Function(
@@ -1324,6 +1585,7 @@ class _$QuizSubmittedImpl implements QuizSubmitted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult Function(
@@ -1356,6 +1618,7 @@ class _$QuizSubmittedImpl implements QuizSubmitted {
   TResult map<TResult extends Object?>({
     required TResult Function(QuizInitial value) initial,
     required TResult Function(QuizLoading value) loading,
+    required TResult Function(QuizzesLoaded value) quizzesLoaded,
     required TResult Function(QuizLoaded value) quizLoaded,
     required TResult Function(QuizInProgress value) quizInProgress,
     required TResult Function(QuizSubmitted value) quizSubmitted,
@@ -1369,6 +1632,7 @@ class _$QuizSubmittedImpl implements QuizSubmitted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuizInitial value)? initial,
     TResult? Function(QuizLoading value)? loading,
+    TResult? Function(QuizzesLoaded value)? quizzesLoaded,
     TResult? Function(QuizLoaded value)? quizLoaded,
     TResult? Function(QuizInProgress value)? quizInProgress,
     TResult? Function(QuizSubmitted value)? quizSubmitted,
@@ -1382,6 +1646,7 @@ class _$QuizSubmittedImpl implements QuizSubmitted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuizInitial value)? initial,
     TResult Function(QuizLoading value)? loading,
+    TResult Function(QuizzesLoaded value)? quizzesLoaded,
     TResult Function(QuizLoaded value)? quizLoaded,
     TResult Function(QuizInProgress value)? quizInProgress,
     TResult Function(QuizSubmitted value)? quizSubmitted,
@@ -1488,6 +1753,7 @@ class _$QuizErrorImpl implements QuizError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(List<QuizEntity> quizzes) quizzesLoaded,
     required TResult Function(
       QuizEntity quiz,
       List<QuestionWithAnswers> questions,
@@ -1519,6 +1785,7 @@ class _$QuizErrorImpl implements QuizError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult? Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult? Function(
@@ -1547,6 +1814,7 @@ class _$QuizErrorImpl implements QuizError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(List<QuizEntity> quizzes)? quizzesLoaded,
     TResult Function(QuizEntity quiz, List<QuestionWithAnswers> questions)?
     quizLoaded,
     TResult Function(
@@ -1579,6 +1847,7 @@ class _$QuizErrorImpl implements QuizError {
   TResult map<TResult extends Object?>({
     required TResult Function(QuizInitial value) initial,
     required TResult Function(QuizLoading value) loading,
+    required TResult Function(QuizzesLoaded value) quizzesLoaded,
     required TResult Function(QuizLoaded value) quizLoaded,
     required TResult Function(QuizInProgress value) quizInProgress,
     required TResult Function(QuizSubmitted value) quizSubmitted,
@@ -1592,6 +1861,7 @@ class _$QuizErrorImpl implements QuizError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuizInitial value)? initial,
     TResult? Function(QuizLoading value)? loading,
+    TResult? Function(QuizzesLoaded value)? quizzesLoaded,
     TResult? Function(QuizLoaded value)? quizLoaded,
     TResult? Function(QuizInProgress value)? quizInProgress,
     TResult? Function(QuizSubmitted value)? quizSubmitted,
@@ -1605,6 +1875,7 @@ class _$QuizErrorImpl implements QuizError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuizInitial value)? initial,
     TResult Function(QuizLoading value)? loading,
+    TResult Function(QuizzesLoaded value)? quizzesLoaded,
     TResult Function(QuizLoaded value)? quizLoaded,
     TResult Function(QuizInProgress value)? quizInProgress,
     TResult Function(QuizSubmitted value)? quizSubmitted,

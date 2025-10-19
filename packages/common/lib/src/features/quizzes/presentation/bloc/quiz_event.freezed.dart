@@ -19,6 +19,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$QuizEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -31,6 +32,7 @@ mixin _$QuizEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -43,6 +45,7 @@ mixin _$QuizEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -56,6 +59,7 @@ mixin _$QuizEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -69,6 +73,7 @@ mixin _$QuizEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -82,6 +87,7 @@ mixin _$QuizEvent {
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,
@@ -113,6 +119,204 @@ class _$QuizEventCopyWithImpl<$Res, $Val extends QuizEvent>
 
   /// Create a copy of QuizEvent
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$LoadCourseQuizzesEventImplCopyWith<$Res> {
+  factory _$$LoadCourseQuizzesEventImplCopyWith(
+    _$LoadCourseQuizzesEventImpl value,
+    $Res Function(_$LoadCourseQuizzesEventImpl) then,
+  ) = __$$LoadCourseQuizzesEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String courseId});
+}
+
+/// @nodoc
+class __$$LoadCourseQuizzesEventImplCopyWithImpl<$Res>
+    extends _$QuizEventCopyWithImpl<$Res, _$LoadCourseQuizzesEventImpl>
+    implements _$$LoadCourseQuizzesEventImplCopyWith<$Res> {
+  __$$LoadCourseQuizzesEventImplCopyWithImpl(
+    _$LoadCourseQuizzesEventImpl _value,
+    $Res Function(_$LoadCourseQuizzesEventImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of QuizEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? courseId = null}) {
+    return _then(
+      _$LoadCourseQuizzesEventImpl(
+        null == courseId
+            ? _value.courseId
+            : courseId // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+
+class _$LoadCourseQuizzesEventImpl implements LoadCourseQuizzesEvent {
+  const _$LoadCourseQuizzesEventImpl(this.courseId);
+
+  @override
+  final String courseId;
+
+  @override
+  String toString() {
+    return 'QuizEvent.loadCourseQuizzes(courseId: $courseId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadCourseQuizzesEventImpl &&
+            (identical(other.courseId, courseId) ||
+                other.courseId == courseId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, courseId);
+
+  /// Create a copy of QuizEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadCourseQuizzesEventImplCopyWith<_$LoadCourseQuizzesEventImpl>
+  get copyWith =>
+      __$$LoadCourseQuizzesEventImplCopyWithImpl<_$LoadCourseQuizzesEventImpl>(
+        this,
+        _$identity,
+      );
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
+    required TResult Function(String quizId) loadQuiz,
+    required TResult Function() startQuiz,
+    required TResult Function(String questionId, List<String> selectedAnswerIds)
+    answerQuestion,
+    required TResult Function() navigateToPreviousQuestion,
+    required TResult Function() navigateToNextQuestion,
+    required TResult Function() timerTick,
+    required TResult Function() submitQuiz,
+    required TResult Function(String resultId) loadQuizResult,
+  }) {
+    return loadCourseQuizzes(courseId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
+    TResult? Function(String quizId)? loadQuiz,
+    TResult? Function()? startQuiz,
+    TResult? Function(String questionId, List<String> selectedAnswerIds)?
+    answerQuestion,
+    TResult? Function()? navigateToPreviousQuestion,
+    TResult? Function()? navigateToNextQuestion,
+    TResult? Function()? timerTick,
+    TResult? Function()? submitQuiz,
+    TResult? Function(String resultId)? loadQuizResult,
+  }) {
+    return loadCourseQuizzes?.call(courseId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
+    TResult Function(String quizId)? loadQuiz,
+    TResult Function()? startQuiz,
+    TResult Function(String questionId, List<String> selectedAnswerIds)?
+    answerQuestion,
+    TResult Function()? navigateToPreviousQuestion,
+    TResult Function()? navigateToNextQuestion,
+    TResult Function()? timerTick,
+    TResult Function()? submitQuiz,
+    TResult Function(String resultId)? loadQuizResult,
+    required TResult orElse(),
+  }) {
+    if (loadCourseQuizzes != null) {
+      return loadCourseQuizzes(courseId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
+    required TResult Function(LoadQuizEvent value) loadQuiz,
+    required TResult Function(StartQuizEvent value) startQuiz,
+    required TResult Function(AnswerQuestionEvent value) answerQuestion,
+    required TResult Function(NavigateToPreviousQuestionEvent value)
+    navigateToPreviousQuestion,
+    required TResult Function(NavigateToNextQuestionEvent value)
+    navigateToNextQuestion,
+    required TResult Function(TimerTickEvent value) timerTick,
+    required TResult Function(SubmitQuizEvent value) submitQuiz,
+    required TResult Function(LoadQuizResultEvent value) loadQuizResult,
+  }) {
+    return loadCourseQuizzes(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
+    TResult? Function(LoadQuizEvent value)? loadQuiz,
+    TResult? Function(StartQuizEvent value)? startQuiz,
+    TResult? Function(AnswerQuestionEvent value)? answerQuestion,
+    TResult? Function(NavigateToPreviousQuestionEvent value)?
+    navigateToPreviousQuestion,
+    TResult? Function(NavigateToNextQuestionEvent value)?
+    navigateToNextQuestion,
+    TResult? Function(TimerTickEvent value)? timerTick,
+    TResult? Function(SubmitQuizEvent value)? submitQuiz,
+    TResult? Function(LoadQuizResultEvent value)? loadQuizResult,
+  }) {
+    return loadCourseQuizzes?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
+    TResult Function(LoadQuizEvent value)? loadQuiz,
+    TResult Function(StartQuizEvent value)? startQuiz,
+    TResult Function(AnswerQuestionEvent value)? answerQuestion,
+    TResult Function(NavigateToPreviousQuestionEvent value)?
+    navigateToPreviousQuestion,
+    TResult Function(NavigateToNextQuestionEvent value)? navigateToNextQuestion,
+    TResult Function(TimerTickEvent value)? timerTick,
+    TResult Function(SubmitQuizEvent value)? submitQuiz,
+    TResult Function(LoadQuizResultEvent value)? loadQuizResult,
+    required TResult orElse(),
+  }) {
+    if (loadCourseQuizzes != null) {
+      return loadCourseQuizzes(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadCourseQuizzesEvent implements QuizEvent {
+  const factory LoadCourseQuizzesEvent(final String courseId) =
+      _$LoadCourseQuizzesEventImpl;
+
+  String get courseId;
+
+  /// Create a copy of QuizEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadCourseQuizzesEventImplCopyWith<_$LoadCourseQuizzesEventImpl>
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -185,6 +389,7 @@ class _$LoadQuizEventImpl implements LoadQuizEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -201,6 +406,7 @@ class _$LoadQuizEventImpl implements LoadQuizEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -217,6 +423,7 @@ class _$LoadQuizEventImpl implements LoadQuizEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -237,6 +444,7 @@ class _$LoadQuizEventImpl implements LoadQuizEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -254,6 +462,7 @@ class _$LoadQuizEventImpl implements LoadQuizEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -271,6 +480,7 @@ class _$LoadQuizEventImpl implements LoadQuizEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,
@@ -344,6 +554,7 @@ class _$StartQuizEventImpl implements StartQuizEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -360,6 +571,7 @@ class _$StartQuizEventImpl implements StartQuizEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -376,6 +588,7 @@ class _$StartQuizEventImpl implements StartQuizEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -396,6 +609,7 @@ class _$StartQuizEventImpl implements StartQuizEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -413,6 +627,7 @@ class _$StartQuizEventImpl implements StartQuizEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -430,6 +645,7 @@ class _$StartQuizEventImpl implements StartQuizEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,
@@ -551,6 +767,7 @@ class _$AnswerQuestionEventImpl implements AnswerQuestionEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -567,6 +784,7 @@ class _$AnswerQuestionEventImpl implements AnswerQuestionEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -583,6 +801,7 @@ class _$AnswerQuestionEventImpl implements AnswerQuestionEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -603,6 +822,7 @@ class _$AnswerQuestionEventImpl implements AnswerQuestionEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -620,6 +840,7 @@ class _$AnswerQuestionEventImpl implements AnswerQuestionEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -637,6 +858,7 @@ class _$AnswerQuestionEventImpl implements AnswerQuestionEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,
@@ -716,6 +938,7 @@ class _$NavigateToPreviousQuestionEventImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -732,6 +955,7 @@ class _$NavigateToPreviousQuestionEventImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -748,6 +972,7 @@ class _$NavigateToPreviousQuestionEventImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -768,6 +993,7 @@ class _$NavigateToPreviousQuestionEventImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -785,6 +1011,7 @@ class _$NavigateToPreviousQuestionEventImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -802,6 +1029,7 @@ class _$NavigateToPreviousQuestionEventImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,
@@ -869,6 +1097,7 @@ class _$NavigateToNextQuestionEventImpl implements NavigateToNextQuestionEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -885,6 +1114,7 @@ class _$NavigateToNextQuestionEventImpl implements NavigateToNextQuestionEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -901,6 +1131,7 @@ class _$NavigateToNextQuestionEventImpl implements NavigateToNextQuestionEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -921,6 +1152,7 @@ class _$NavigateToNextQuestionEventImpl implements NavigateToNextQuestionEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -938,6 +1170,7 @@ class _$NavigateToNextQuestionEventImpl implements NavigateToNextQuestionEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -955,6 +1188,7 @@ class _$NavigateToNextQuestionEventImpl implements NavigateToNextQuestionEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,
@@ -1021,6 +1255,7 @@ class _$TimerTickEventImpl implements TimerTickEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -1037,6 +1272,7 @@ class _$TimerTickEventImpl implements TimerTickEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -1053,6 +1289,7 @@ class _$TimerTickEventImpl implements TimerTickEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -1073,6 +1310,7 @@ class _$TimerTickEventImpl implements TimerTickEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -1090,6 +1328,7 @@ class _$TimerTickEventImpl implements TimerTickEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -1107,6 +1346,7 @@ class _$TimerTickEventImpl implements TimerTickEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,
@@ -1172,6 +1412,7 @@ class _$SubmitQuizEventImpl implements SubmitQuizEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -1188,6 +1429,7 @@ class _$SubmitQuizEventImpl implements SubmitQuizEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -1204,6 +1446,7 @@ class _$SubmitQuizEventImpl implements SubmitQuizEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -1224,6 +1467,7 @@ class _$SubmitQuizEventImpl implements SubmitQuizEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -1241,6 +1485,7 @@ class _$SubmitQuizEventImpl implements SubmitQuizEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -1258,6 +1503,7 @@ class _$SubmitQuizEventImpl implements SubmitQuizEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,
@@ -1354,6 +1600,7 @@ class _$LoadQuizResultEventImpl implements LoadQuizResultEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String courseId) loadCourseQuizzes,
     required TResult Function(String quizId) loadQuiz,
     required TResult Function() startQuiz,
     required TResult Function(String questionId, List<String> selectedAnswerIds)
@@ -1370,6 +1617,7 @@ class _$LoadQuizResultEventImpl implements LoadQuizResultEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String courseId)? loadCourseQuizzes,
     TResult? Function(String quizId)? loadQuiz,
     TResult? Function()? startQuiz,
     TResult? Function(String questionId, List<String> selectedAnswerIds)?
@@ -1386,6 +1634,7 @@ class _$LoadQuizResultEventImpl implements LoadQuizResultEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String courseId)? loadCourseQuizzes,
     TResult Function(String quizId)? loadQuiz,
     TResult Function()? startQuiz,
     TResult Function(String questionId, List<String> selectedAnswerIds)?
@@ -1406,6 +1655,7 @@ class _$LoadQuizResultEventImpl implements LoadQuizResultEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(LoadCourseQuizzesEvent value) loadCourseQuizzes,
     required TResult Function(LoadQuizEvent value) loadQuiz,
     required TResult Function(StartQuizEvent value) startQuiz,
     required TResult Function(AnswerQuestionEvent value) answerQuestion,
@@ -1423,6 +1673,7 @@ class _$LoadQuizResultEventImpl implements LoadQuizResultEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult? Function(LoadQuizEvent value)? loadQuiz,
     TResult? Function(StartQuizEvent value)? startQuiz,
     TResult? Function(AnswerQuestionEvent value)? answerQuestion,
@@ -1440,6 +1691,7 @@ class _$LoadQuizResultEventImpl implements LoadQuizResultEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadCourseQuizzesEvent value)? loadCourseQuizzes,
     TResult Function(LoadQuizEvent value)? loadQuiz,
     TResult Function(StartQuizEvent value)? startQuiz,
     TResult Function(AnswerQuestionEvent value)? answerQuestion,

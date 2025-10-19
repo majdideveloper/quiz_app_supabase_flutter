@@ -32,24 +32,16 @@ mixin _$QuizModel {
   QuizType get quizType => throw _privateConstructorUsedError;
   @JsonKey(name: 'passing_score')
   int get passingScore => throw _privateConstructorUsedError;
-  @JsonKey(name: 'time_limit')
+  @JsonKey(name: 'time_limit_minutes')
   int? get timeLimit => throw _privateConstructorUsedError;
-  @JsonKey(name: 'questions_count')
-  int get questionsCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'max_attempts')
   int? get maxAttempts => throw _privateConstructorUsedError;
-  @JsonKey(name: 'shuffle_questions')
-  bool get shuffleQuestions => throw _privateConstructorUsedError;
-  @JsonKey(name: 'shuffle_answers')
-  bool get shuffleAnswers => throw _privateConstructorUsedError;
-  @JsonKey(name: 'show_correct_answers')
-  bool get showCorrectAnswers => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_active')
-  bool get isActive => throw _privateConstructorUsedError;
+  @JsonKey(name: 'order_index')
+  int get orderIndex => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_required')
+  bool get isRequired => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_at')
-  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this QuizModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -74,15 +66,11 @@ abstract class $QuizModelCopyWith<$Res> {
     String description,
     @JsonKey(name: 'quiz_type') QuizType quizType,
     @JsonKey(name: 'passing_score') int passingScore,
-    @JsonKey(name: 'time_limit') int? timeLimit,
-    @JsonKey(name: 'questions_count') int questionsCount,
+    @JsonKey(name: 'time_limit_minutes') int? timeLimit,
     @JsonKey(name: 'max_attempts') int? maxAttempts,
-    @JsonKey(name: 'shuffle_questions') bool shuffleQuestions,
-    @JsonKey(name: 'shuffle_answers') bool shuffleAnswers,
-    @JsonKey(name: 'show_correct_answers') bool showCorrectAnswers,
-    @JsonKey(name: 'is_active') bool isActive,
+    @JsonKey(name: 'order_index') int orderIndex,
+    @JsonKey(name: 'is_required') bool isRequired,
     @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
 }
 
@@ -109,14 +97,10 @@ class _$QuizModelCopyWithImpl<$Res, $Val extends QuizModel>
     Object? quizType = null,
     Object? passingScore = null,
     Object? timeLimit = freezed,
-    Object? questionsCount = null,
     Object? maxAttempts = freezed,
-    Object? shuffleQuestions = null,
-    Object? shuffleAnswers = null,
-    Object? showCorrectAnswers = null,
-    Object? isActive = null,
+    Object? orderIndex = null,
+    Object? isRequired = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(
       _value.copyWith(
@@ -160,45 +144,25 @@ class _$QuizModelCopyWithImpl<$Res, $Val extends QuizModel>
                     ? _value.timeLimit
                     : timeLimit // ignore: cast_nullable_to_non_nullable
                         as int?,
-            questionsCount:
-                null == questionsCount
-                    ? _value.questionsCount
-                    : questionsCount // ignore: cast_nullable_to_non_nullable
-                        as int,
             maxAttempts:
                 freezed == maxAttempts
                     ? _value.maxAttempts
                     : maxAttempts // ignore: cast_nullable_to_non_nullable
                         as int?,
-            shuffleQuestions:
-                null == shuffleQuestions
-                    ? _value.shuffleQuestions
-                    : shuffleQuestions // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            shuffleAnswers:
-                null == shuffleAnswers
-                    ? _value.shuffleAnswers
-                    : shuffleAnswers // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            showCorrectAnswers:
-                null == showCorrectAnswers
-                    ? _value.showCorrectAnswers
-                    : showCorrectAnswers // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isActive:
-                null == isActive
-                    ? _value.isActive
-                    : isActive // ignore: cast_nullable_to_non_nullable
+            orderIndex:
+                null == orderIndex
+                    ? _value.orderIndex
+                    : orderIndex // ignore: cast_nullable_to_non_nullable
+                        as int,
+            isRequired:
+                null == isRequired
+                    ? _value.isRequired
+                    : isRequired // ignore: cast_nullable_to_non_nullable
                         as bool,
             createdAt:
                 null == createdAt
                     ? _value.createdAt
                     : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
                         as DateTime,
           )
           as $Val,
@@ -223,15 +187,11 @@ abstract class _$$QuizModelImplCopyWith<$Res>
     String description,
     @JsonKey(name: 'quiz_type') QuizType quizType,
     @JsonKey(name: 'passing_score') int passingScore,
-    @JsonKey(name: 'time_limit') int? timeLimit,
-    @JsonKey(name: 'questions_count') int questionsCount,
+    @JsonKey(name: 'time_limit_minutes') int? timeLimit,
     @JsonKey(name: 'max_attempts') int? maxAttempts,
-    @JsonKey(name: 'shuffle_questions') bool shuffleQuestions,
-    @JsonKey(name: 'shuffle_answers') bool shuffleAnswers,
-    @JsonKey(name: 'show_correct_answers') bool showCorrectAnswers,
-    @JsonKey(name: 'is_active') bool isActive,
+    @JsonKey(name: 'order_index') int orderIndex,
+    @JsonKey(name: 'is_required') bool isRequired,
     @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
 }
 
@@ -257,14 +217,10 @@ class __$$QuizModelImplCopyWithImpl<$Res>
     Object? quizType = null,
     Object? passingScore = null,
     Object? timeLimit = freezed,
-    Object? questionsCount = null,
     Object? maxAttempts = freezed,
-    Object? shuffleQuestions = null,
-    Object? shuffleAnswers = null,
-    Object? showCorrectAnswers = null,
-    Object? isActive = null,
+    Object? orderIndex = null,
+    Object? isRequired = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(
       _$QuizModelImpl(
@@ -308,45 +264,25 @@ class __$$QuizModelImplCopyWithImpl<$Res>
                 ? _value.timeLimit
                 : timeLimit // ignore: cast_nullable_to_non_nullable
                     as int?,
-        questionsCount:
-            null == questionsCount
-                ? _value.questionsCount
-                : questionsCount // ignore: cast_nullable_to_non_nullable
-                    as int,
         maxAttempts:
             freezed == maxAttempts
                 ? _value.maxAttempts
                 : maxAttempts // ignore: cast_nullable_to_non_nullable
                     as int?,
-        shuffleQuestions:
-            null == shuffleQuestions
-                ? _value.shuffleQuestions
-                : shuffleQuestions // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        shuffleAnswers:
-            null == shuffleAnswers
-                ? _value.shuffleAnswers
-                : shuffleAnswers // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        showCorrectAnswers:
-            null == showCorrectAnswers
-                ? _value.showCorrectAnswers
-                : showCorrectAnswers // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isActive:
-            null == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
+        orderIndex:
+            null == orderIndex
+                ? _value.orderIndex
+                : orderIndex // ignore: cast_nullable_to_non_nullable
+                    as int,
+        isRequired:
+            null == isRequired
+                ? _value.isRequired
+                : isRequired // ignore: cast_nullable_to_non_nullable
                     as bool,
         createdAt:
             null == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
                     as DateTime,
       ),
     );
@@ -361,18 +297,14 @@ class _$QuizModelImpl extends _QuizModel {
     @JsonKey(name: 'course_id') required this.courseId,
     @JsonKey(name: 'lesson_id') this.lessonId,
     required this.title,
-    required this.description,
-    @JsonKey(name: 'quiz_type') required this.quizType,
-    @JsonKey(name: 'passing_score') required this.passingScore,
-    @JsonKey(name: 'time_limit') this.timeLimit,
-    @JsonKey(name: 'questions_count') required this.questionsCount,
+    this.description = '',
+    @JsonKey(name: 'quiz_type') this.quizType = QuizType.lesson,
+    @JsonKey(name: 'passing_score') this.passingScore = 70,
+    @JsonKey(name: 'time_limit_minutes') this.timeLimit,
     @JsonKey(name: 'max_attempts') this.maxAttempts,
-    @JsonKey(name: 'shuffle_questions') this.shuffleQuestions = true,
-    @JsonKey(name: 'shuffle_answers') this.shuffleAnswers = true,
-    @JsonKey(name: 'show_correct_answers') this.showCorrectAnswers = true,
-    @JsonKey(name: 'is_active') this.isActive = true,
+    @JsonKey(name: 'order_index') required this.orderIndex,
+    @JsonKey(name: 'is_required') this.isRequired = true,
     @JsonKey(name: 'created_at') required this.createdAt,
-    @JsonKey(name: 'updated_at') required this.updatedAt,
   }) : super._();
 
   factory _$QuizModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -389,6 +321,7 @@ class _$QuizModelImpl extends _QuizModel {
   @override
   final String title;
   @override
+  @JsonKey()
   final String description;
   @override
   @JsonKey(name: 'quiz_type')
@@ -397,36 +330,24 @@ class _$QuizModelImpl extends _QuizModel {
   @JsonKey(name: 'passing_score')
   final int passingScore;
   @override
-  @JsonKey(name: 'time_limit')
+  @JsonKey(name: 'time_limit_minutes')
   final int? timeLimit;
-  @override
-  @JsonKey(name: 'questions_count')
-  final int questionsCount;
   @override
   @JsonKey(name: 'max_attempts')
   final int? maxAttempts;
   @override
-  @JsonKey(name: 'shuffle_questions')
-  final bool shuffleQuestions;
+  @JsonKey(name: 'order_index')
+  final int orderIndex;
   @override
-  @JsonKey(name: 'shuffle_answers')
-  final bool shuffleAnswers;
-  @override
-  @JsonKey(name: 'show_correct_answers')
-  final bool showCorrectAnswers;
-  @override
-  @JsonKey(name: 'is_active')
-  final bool isActive;
+  @JsonKey(name: 'is_required')
+  final bool isRequired;
   @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
-  @override
-  @JsonKey(name: 'updated_at')
-  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'QuizModel(id: $id, courseId: $courseId, lessonId: $lessonId, title: $title, description: $description, quizType: $quizType, passingScore: $passingScore, timeLimit: $timeLimit, questionsCount: $questionsCount, maxAttempts: $maxAttempts, shuffleQuestions: $shuffleQuestions, shuffleAnswers: $shuffleAnswers, showCorrectAnswers: $showCorrectAnswers, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'QuizModel(id: $id, courseId: $courseId, lessonId: $lessonId, title: $title, description: $description, quizType: $quizType, passingScore: $passingScore, timeLimit: $timeLimit, maxAttempts: $maxAttempts, orderIndex: $orderIndex, isRequired: $isRequired, createdAt: $createdAt)';
   }
 
   @override
@@ -448,22 +369,14 @@ class _$QuizModelImpl extends _QuizModel {
                 other.passingScore == passingScore) &&
             (identical(other.timeLimit, timeLimit) ||
                 other.timeLimit == timeLimit) &&
-            (identical(other.questionsCount, questionsCount) ||
-                other.questionsCount == questionsCount) &&
             (identical(other.maxAttempts, maxAttempts) ||
                 other.maxAttempts == maxAttempts) &&
-            (identical(other.shuffleQuestions, shuffleQuestions) ||
-                other.shuffleQuestions == shuffleQuestions) &&
-            (identical(other.shuffleAnswers, shuffleAnswers) ||
-                other.shuffleAnswers == shuffleAnswers) &&
-            (identical(other.showCorrectAnswers, showCorrectAnswers) ||
-                other.showCorrectAnswers == showCorrectAnswers) &&
-            (identical(other.isActive, isActive) ||
-                other.isActive == isActive) &&
+            (identical(other.orderIndex, orderIndex) ||
+                other.orderIndex == orderIndex) &&
+            (identical(other.isRequired, isRequired) ||
+                other.isRequired == isRequired) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -478,14 +391,10 @@ class _$QuizModelImpl extends _QuizModel {
     quizType,
     passingScore,
     timeLimit,
-    questionsCount,
     maxAttempts,
-    shuffleQuestions,
-    shuffleAnswers,
-    showCorrectAnswers,
-    isActive,
+    orderIndex,
+    isRequired,
     createdAt,
-    updatedAt,
   );
 
   /// Create a copy of QuizModel
@@ -508,18 +417,14 @@ abstract class _QuizModel extends QuizModel {
     @JsonKey(name: 'course_id') required final String courseId,
     @JsonKey(name: 'lesson_id') final String? lessonId,
     required final String title,
-    required final String description,
-    @JsonKey(name: 'quiz_type') required final QuizType quizType,
-    @JsonKey(name: 'passing_score') required final int passingScore,
-    @JsonKey(name: 'time_limit') final int? timeLimit,
-    @JsonKey(name: 'questions_count') required final int questionsCount,
+    final String description,
+    @JsonKey(name: 'quiz_type') final QuizType quizType,
+    @JsonKey(name: 'passing_score') final int passingScore,
+    @JsonKey(name: 'time_limit_minutes') final int? timeLimit,
     @JsonKey(name: 'max_attempts') final int? maxAttempts,
-    @JsonKey(name: 'shuffle_questions') final bool shuffleQuestions,
-    @JsonKey(name: 'shuffle_answers') final bool shuffleAnswers,
-    @JsonKey(name: 'show_correct_answers') final bool showCorrectAnswers,
-    @JsonKey(name: 'is_active') final bool isActive,
+    @JsonKey(name: 'order_index') required final int orderIndex,
+    @JsonKey(name: 'is_required') final bool isRequired,
     @JsonKey(name: 'created_at') required final DateTime createdAt,
-    @JsonKey(name: 'updated_at') required final DateTime updatedAt,
   }) = _$QuizModelImpl;
   const _QuizModel._() : super._();
 
@@ -545,32 +450,20 @@ abstract class _QuizModel extends QuizModel {
   @JsonKey(name: 'passing_score')
   int get passingScore;
   @override
-  @JsonKey(name: 'time_limit')
+  @JsonKey(name: 'time_limit_minutes')
   int? get timeLimit;
-  @override
-  @JsonKey(name: 'questions_count')
-  int get questionsCount;
   @override
   @JsonKey(name: 'max_attempts')
   int? get maxAttempts;
   @override
-  @JsonKey(name: 'shuffle_questions')
-  bool get shuffleQuestions;
+  @JsonKey(name: 'order_index')
+  int get orderIndex;
   @override
-  @JsonKey(name: 'shuffle_answers')
-  bool get shuffleAnswers;
-  @override
-  @JsonKey(name: 'show_correct_answers')
-  bool get showCorrectAnswers;
-  @override
-  @JsonKey(name: 'is_active')
-  bool get isActive;
+  @JsonKey(name: 'is_required')
+  bool get isRequired;
   @override
   @JsonKey(name: 'created_at')
   DateTime get createdAt;
-  @override
-  @JsonKey(name: 'updated_at')
-  DateTime get updatedAt;
 
   /// Create a copy of QuizModel
   /// with the given fields replaced by the non-null parameter values.

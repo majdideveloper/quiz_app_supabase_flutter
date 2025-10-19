@@ -20,33 +20,25 @@ class QuizModel with _$QuizModel {
     @JsonKey(name: 'lesson_id')
     String? lessonId,
     required String title,
-    required String description,
+    @Default('')
+    String description,
     @JsonKey(name: 'quiz_type')
-    required QuizType quizType,
+    @Default(QuizType.lesson)
+    QuizType quizType,
     @JsonKey(name: 'passing_score')
-    required int passingScore,
-    @JsonKey(name: 'time_limit')
+    @Default(70)
+    int passingScore,
+    @JsonKey(name: 'time_limit_minutes')
     int? timeLimit,
-    @JsonKey(name: 'questions_count')
-    required int questionsCount,
     @JsonKey(name: 'max_attempts')
     int? maxAttempts,
-    @JsonKey(name: 'shuffle_questions')
+    @JsonKey(name: 'order_index')
+    required int orderIndex,
+    @JsonKey(name: 'is_required')
     @Default(true)
-    bool shuffleQuestions,
-    @JsonKey(name: 'shuffle_answers')
-    @Default(true)
-    bool shuffleAnswers,
-    @JsonKey(name: 'show_correct_answers')
-    @Default(true)
-    bool showCorrectAnswers,
-    @JsonKey(name: 'is_active')
-    @Default(true)
-    bool isActive,
+    bool isRequired,
     @JsonKey(name: 'created_at')
     required DateTime createdAt,
-    @JsonKey(name: 'updated_at')
-    required DateTime updatedAt,
   }) = _QuizModel;
 
   const QuizModel._();
@@ -56,7 +48,7 @@ class QuizModel with _$QuizModel {
       _$QuizModelFromJson(json);
 
   /// Convert QuizModel to domain entity
-  QuizEntity toEntity() {
+  QuizEntity toEntity({int? questionsCount}) {
     return QuizEntity(
       id: id,
       courseId: courseId,
@@ -66,14 +58,11 @@ class QuizModel with _$QuizModel {
       quizType: quizType,
       passingScore: passingScore,
       timeLimit: timeLimit,
-      questionsCount: questionsCount,
+      questionsCount: questionsCount ?? 0,
       maxAttempts: maxAttempts,
-      shuffleQuestions: shuffleQuestions,
-      shuffleAnswers: shuffleAnswers,
-      showCorrectAnswers: showCorrectAnswers,
-      isActive: isActive,
+      orderIndex: orderIndex,
+      isRequired: isRequired,
       createdAt: createdAt,
-      updatedAt: updatedAt,
     );
   }
 
@@ -88,14 +77,10 @@ class QuizModel with _$QuizModel {
       quizType: entity.quizType,
       passingScore: entity.passingScore,
       timeLimit: entity.timeLimit,
-      questionsCount: entity.questionsCount,
       maxAttempts: entity.maxAttempts,
-      shuffleQuestions: entity.shuffleQuestions,
-      shuffleAnswers: entity.shuffleAnswers,
-      showCorrectAnswers: entity.showCorrectAnswers,
-      isActive: entity.isActive,
+      orderIndex: entity.orderIndex,
+      isRequired: entity.isRequired,
       createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
     );
   }
 }

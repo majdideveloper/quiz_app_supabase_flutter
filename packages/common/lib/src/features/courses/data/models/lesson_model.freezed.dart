@@ -35,14 +35,13 @@ mixin _$LessonModel {
   int? get videoDuration => throw _privateConstructorUsedError;
   @JsonKey(name: 'order_index')
   int get orderIndex => throw _privateConstructorUsedError;
-  int get duration => throw _privateConstructorUsedError;
+  @JsonKey(name: 'duration_minutes')
+  int? get duration => throw _privateConstructorUsedError;
   List<String> get resources => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_preview')
   bool get isPreview => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_at')
-  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this LessonModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -71,11 +70,10 @@ abstract class $LessonModelCopyWith<$Res> {
     @JsonKey(name: 'video_thumbnail_url') String? videoThumbnailUrl,
     @JsonKey(name: 'video_duration') int? videoDuration,
     @JsonKey(name: 'order_index') int orderIndex,
-    int duration,
+    @JsonKey(name: 'duration_minutes') int? duration,
     List<String> resources,
     @JsonKey(name: 'is_preview') bool isPreview,
     @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
 }
 
@@ -103,11 +101,10 @@ class _$LessonModelCopyWithImpl<$Res, $Val extends LessonModel>
     Object? videoThumbnailUrl = freezed,
     Object? videoDuration = freezed,
     Object? orderIndex = null,
-    Object? duration = null,
+    Object? duration = freezed,
     Object? resources = null,
     Object? isPreview = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(
       _value.copyWith(
@@ -157,10 +154,10 @@ class _$LessonModelCopyWithImpl<$Res, $Val extends LessonModel>
                     : orderIndex // ignore: cast_nullable_to_non_nullable
                         as int,
             duration:
-                null == duration
+                freezed == duration
                     ? _value.duration
                     : duration // ignore: cast_nullable_to_non_nullable
-                        as int,
+                        as int?,
             resources:
                 null == resources
                     ? _value.resources
@@ -175,11 +172,6 @@ class _$LessonModelCopyWithImpl<$Res, $Val extends LessonModel>
                 null == createdAt
                     ? _value.createdAt
                     : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
                         as DateTime,
           )
           as $Val,
@@ -206,11 +198,10 @@ abstract class _$$LessonModelImplCopyWith<$Res>
     @JsonKey(name: 'video_thumbnail_url') String? videoThumbnailUrl,
     @JsonKey(name: 'video_duration') int? videoDuration,
     @JsonKey(name: 'order_index') int orderIndex,
-    int duration,
+    @JsonKey(name: 'duration_minutes') int? duration,
     List<String> resources,
     @JsonKey(name: 'is_preview') bool isPreview,
     @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
 }
 
@@ -237,11 +228,10 @@ class __$$LessonModelImplCopyWithImpl<$Res>
     Object? videoThumbnailUrl = freezed,
     Object? videoDuration = freezed,
     Object? orderIndex = null,
-    Object? duration = null,
+    Object? duration = freezed,
     Object? resources = null,
     Object? isPreview = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(
       _$LessonModelImpl(
@@ -291,10 +281,10 @@ class __$$LessonModelImplCopyWithImpl<$Res>
                 : orderIndex // ignore: cast_nullable_to_non_nullable
                     as int,
         duration:
-            null == duration
+            freezed == duration
                 ? _value.duration
                 : duration // ignore: cast_nullable_to_non_nullable
-                    as int,
+                    as int?,
         resources:
             null == resources
                 ? _value._resources
@@ -310,11 +300,6 @@ class __$$LessonModelImplCopyWithImpl<$Res>
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
                     as DateTime,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
       ),
     );
   }
@@ -328,16 +313,15 @@ class _$LessonModelImpl extends _LessonModel {
     @JsonKey(name: 'course_id') required this.courseId,
     required this.title,
     required this.description,
-    required this.content,
+    this.content = '',
     @JsonKey(name: 'video_url') this.videoUrl,
     @JsonKey(name: 'video_thumbnail_url') this.videoThumbnailUrl,
     @JsonKey(name: 'video_duration') this.videoDuration,
     @JsonKey(name: 'order_index') required this.orderIndex,
-    required this.duration,
+    @JsonKey(name: 'duration_minutes') this.duration,
     final List<String> resources = const [],
     @JsonKey(name: 'is_preview') this.isPreview = false,
     @JsonKey(name: 'created_at') required this.createdAt,
-    @JsonKey(name: 'updated_at') required this.updatedAt,
   }) : _resources = resources,
        super._();
 
@@ -354,6 +338,7 @@ class _$LessonModelImpl extends _LessonModel {
   @override
   final String description;
   @override
+  @JsonKey()
   final String content;
   @override
   @JsonKey(name: 'video_url')
@@ -368,7 +353,8 @@ class _$LessonModelImpl extends _LessonModel {
   @JsonKey(name: 'order_index')
   final int orderIndex;
   @override
-  final int duration;
+  @JsonKey(name: 'duration_minutes')
+  final int? duration;
   final List<String> _resources;
   @override
   @JsonKey()
@@ -384,13 +370,10 @@ class _$LessonModelImpl extends _LessonModel {
   @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
-  @override
-  @JsonKey(name: 'updated_at')
-  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'LessonModel(id: $id, courseId: $courseId, title: $title, description: $description, content: $content, videoUrl: $videoUrl, videoThumbnailUrl: $videoThumbnailUrl, videoDuration: $videoDuration, orderIndex: $orderIndex, duration: $duration, resources: $resources, isPreview: $isPreview, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'LessonModel(id: $id, courseId: $courseId, title: $title, description: $description, content: $content, videoUrl: $videoUrl, videoThumbnailUrl: $videoThumbnailUrl, videoDuration: $videoDuration, orderIndex: $orderIndex, duration: $duration, resources: $resources, isPreview: $isPreview, createdAt: $createdAt)';
   }
 
   @override
@@ -422,9 +405,7 @@ class _$LessonModelImpl extends _LessonModel {
             (identical(other.isPreview, isPreview) ||
                 other.isPreview == isPreview) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.createdAt == createdAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -444,7 +425,6 @@ class _$LessonModelImpl extends _LessonModel {
     const DeepCollectionEquality().hash(_resources),
     isPreview,
     createdAt,
-    updatedAt,
   );
 
   /// Create a copy of LessonModel
@@ -467,16 +447,15 @@ abstract class _LessonModel extends LessonModel {
     @JsonKey(name: 'course_id') required final String courseId,
     required final String title,
     required final String description,
-    required final String content,
+    final String content,
     @JsonKey(name: 'video_url') final String? videoUrl,
     @JsonKey(name: 'video_thumbnail_url') final String? videoThumbnailUrl,
     @JsonKey(name: 'video_duration') final int? videoDuration,
     @JsonKey(name: 'order_index') required final int orderIndex,
-    required final int duration,
+    @JsonKey(name: 'duration_minutes') final int? duration,
     final List<String> resources,
     @JsonKey(name: 'is_preview') final bool isPreview,
     @JsonKey(name: 'created_at') required final DateTime createdAt,
-    @JsonKey(name: 'updated_at') required final DateTime updatedAt,
   }) = _$LessonModelImpl;
   const _LessonModel._() : super._();
 
@@ -507,7 +486,8 @@ abstract class _LessonModel extends LessonModel {
   @JsonKey(name: 'order_index')
   int get orderIndex;
   @override
-  int get duration;
+  @JsonKey(name: 'duration_minutes')
+  int? get duration;
   @override
   List<String> get resources;
   @override
@@ -516,9 +496,6 @@ abstract class _LessonModel extends LessonModel {
   @override
   @JsonKey(name: 'created_at')
   DateTime get createdAt;
-  @override
-  @JsonKey(name: 'updated_at')
-  DateTime get updatedAt;
 
   /// Create a copy of LessonModel
   /// with the given fields replaced by the non-null parameter values.

@@ -26,7 +26,7 @@ mixin _$LessonEntity {
   String? get videoThumbnailUrl => throw _privateConstructorUsedError;
   int? get videoDuration => throw _privateConstructorUsedError;
   int get orderIndex => throw _privateConstructorUsedError;
-  int get duration => throw _privateConstructorUsedError;
+  int? get duration => throw _privateConstructorUsedError;
   List<String> get resources => throw _privateConstructorUsedError;
   bool get isPreview => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -56,7 +56,7 @@ abstract class $LessonEntityCopyWith<$Res> {
     String? videoThumbnailUrl,
     int? videoDuration,
     int orderIndex,
-    int duration,
+    int? duration,
     List<String> resources,
     bool isPreview,
     DateTime createdAt,
@@ -88,7 +88,7 @@ class _$LessonEntityCopyWithImpl<$Res, $Val extends LessonEntity>
     Object? videoThumbnailUrl = freezed,
     Object? videoDuration = freezed,
     Object? orderIndex = null,
-    Object? duration = null,
+    Object? duration = freezed,
     Object? resources = null,
     Object? isPreview = null,
     Object? createdAt = null,
@@ -142,10 +142,10 @@ class _$LessonEntityCopyWithImpl<$Res, $Val extends LessonEntity>
                     : orderIndex // ignore: cast_nullable_to_non_nullable
                         as int,
             duration:
-                null == duration
+                freezed == duration
                     ? _value.duration
                     : duration // ignore: cast_nullable_to_non_nullable
-                        as int,
+                        as int?,
             resources:
                 null == resources
                     ? _value.resources
@@ -191,7 +191,7 @@ abstract class _$$LessonEntityImplCopyWith<$Res>
     String? videoThumbnailUrl,
     int? videoDuration,
     int orderIndex,
-    int duration,
+    int? duration,
     List<String> resources,
     bool isPreview,
     DateTime createdAt,
@@ -222,7 +222,7 @@ class __$$LessonEntityImplCopyWithImpl<$Res>
     Object? videoThumbnailUrl = freezed,
     Object? videoDuration = freezed,
     Object? orderIndex = null,
-    Object? duration = null,
+    Object? duration = freezed,
     Object? resources = null,
     Object? isPreview = null,
     Object? createdAt = null,
@@ -276,10 +276,10 @@ class __$$LessonEntityImplCopyWithImpl<$Res>
                 : orderIndex // ignore: cast_nullable_to_non_nullable
                     as int,
         duration:
-            null == duration
+            freezed == duration
                 ? _value.duration
                 : duration // ignore: cast_nullable_to_non_nullable
-                    as int,
+                    as int?,
         resources:
             null == resources
                 ? _value._resources
@@ -313,12 +313,12 @@ class _$LessonEntityImpl extends _LessonEntity {
     required this.courseId,
     required this.title,
     required this.description,
-    required this.content,
+    this.content = '',
     this.videoUrl,
     this.videoThumbnailUrl,
     this.videoDuration,
     required this.orderIndex,
-    required this.duration,
+    this.duration,
     final List<String> resources = const [],
     this.isPreview = false,
     required this.createdAt,
@@ -335,6 +335,7 @@ class _$LessonEntityImpl extends _LessonEntity {
   @override
   final String description;
   @override
+  @JsonKey()
   final String content;
   @override
   final String? videoUrl;
@@ -345,7 +346,7 @@ class _$LessonEntityImpl extends _LessonEntity {
   @override
   final int orderIndex;
   @override
-  final int duration;
+  final int? duration;
   final List<String> _resources;
   @override
   @JsonKey()
@@ -436,12 +437,12 @@ abstract class _LessonEntity extends LessonEntity {
     required final String courseId,
     required final String title,
     required final String description,
-    required final String content,
+    final String content,
     final String? videoUrl,
     final String? videoThumbnailUrl,
     final int? videoDuration,
     required final int orderIndex,
-    required final int duration,
+    final int? duration,
     final List<String> resources,
     final bool isPreview,
     required final DateTime createdAt,
@@ -468,7 +469,7 @@ abstract class _LessonEntity extends LessonEntity {
   @override
   int get orderIndex;
   @override
-  int get duration;
+  int? get duration;
   @override
   List<String> get resources;
   @override
