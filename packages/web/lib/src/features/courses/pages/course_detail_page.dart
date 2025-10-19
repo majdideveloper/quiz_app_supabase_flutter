@@ -284,61 +284,57 @@ class _CourseDetailPageState extends State<CourseDetailPage>
   }
 
   Widget _buildTabs(BuildContext context, common.CourseEntity course) {
-    return Container(
-      constraints: BoxConstraints(
-        minHeight: MediaQuery.of(context).size.height - 400,
-      ),
-      child: Column(
-        children: [
-          // TabBar
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.grey[300]!,
-                  width: 1,
-                ),
-              ),
-            ),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: ResponsiveHelper.getMaxContentWidth(context),
-                ),
-                child: TabBar(
-                  controller: _tabController,
-                  labelColor: common.AppColors.primary,
-                  unselectedLabelColor: common.AppColors.textSecondary,
-                  indicatorColor: common.AppColors.primary,
-                  tabs: const [
-                    Tab(
-                      icon: Icon(Icons.play_circle_outline),
-                      text: 'Leçons',
-                    ),
-                    Tab(
-                      icon: Icon(Icons.quiz_outlined),
-                      text: 'Quizzes',
-                    ),
-                  ],
-                ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // TabBar
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.grey[300]!,
+                width: 1,
               ),
             ),
           ),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: ResponsiveHelper.getMaxContentWidth(context),
+              ),
+              child: TabBar(
+                controller: _tabController,
+                labelColor: common.AppColors.primary,
+                unselectedLabelColor: common.AppColors.textSecondary,
+                indicatorColor: common.AppColors.primary,
+                tabs: const [
+                  Tab(
+                    icon: Icon(Icons.play_circle_outline),
+                    text: 'Leçons',
+                  ),
+                  Tab(
+                    icon: Icon(Icons.quiz_outlined),
+                    text: 'Quizzes',
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
 
-          // TabBarView
-          SizedBox(
-            height: 600, // Hauteur fixe pour le contenu des onglets
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                LessonListTab(courseId: course.id),
-                QuizListTab(courseId: course.id),
-              ],
-            ),
+        // TabBarView content - dynamically sized
+        SizedBox(
+          height: 600,
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              LessonListTab(courseId: course.id),
+              QuizListTab(courseId: course.id),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
