@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:common/common.dart' as common;
+import '../../../common/widgets/app_navbar.dart';
+import '../../../core/utils/responsive_helper.dart';
 import '../widgets/admin_sidebar.dart';
 import '../widgets/stat_card.dart';
 
@@ -21,11 +23,15 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = ResponsiveHelper.isMobileOrTablet(context);
+
     return Scaffold(
+      appBar: const AppNavbar(),
+      drawer: isMobile ? const Drawer(child: AdminSidebar(currentRoute: '/admin')) : null,
       body: Row(
         children: [
-          // Sidebar
-          const AdminSidebar(currentRoute: '/admin'),
+          // Sidebar (desktop only)
+          if (!isMobile) const AdminSidebar(currentRoute: '/admin'),
 
           // Contenu principal
           Expanded(
@@ -34,7 +40,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                 return state.when(
                   initial: () => const Center(child: CircularProgressIndicator()),
                   loading: () => const Center(child: CircularProgressIndicator()),
-                  dashboardLoaded: (stats) => _buildDashboard(stats),
+                  dashboardLoaded: (stats) => _buildDashboard(stats, isMobile),
                   usersLoaded: (_) => const SizedBox(),
                   coursesLoaded: (_) => const SizedBox(),
                   quizzesLoaded: (_) => const SizedBox(),
@@ -50,50 +56,53 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     );
   }
 
-  Widget _buildDashboard(common.AdminStatsEntity stats) {
+  Widget _buildDashboard(common.AdminStatsEntity stats, bool isMobile) {
+    final theme = Theme.of(context);
+    final crossAxisCount = isMobile ? 2 : 4;
+
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(isMobile ? 16 : 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
           Text(
             'Tableau de bord',
-            style: common.AppTypography.displaySmall.copyWith(
+            style: theme.textTheme.displaySmall?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             'Vue d\'ensemble de la plateforme',
-            style: common.AppTypography.titleMedium.copyWith(
-              color: common.AppColors.textSecondary,
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: 32),
 
-          // Stats cards
+          // Stats cards - Responsive grid
           GridView.count(
-            crossAxisCount: 4,
+            crossAxisCount: crossAxisCount,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: 1.5,
+            childAspectRatio: isMobile ? 1.2 : 1.5,
             children: [
               StatCard(
                 title: 'Utilisateurs',
                 value: '${stats.totalUsers}',
                 subtitle: '${stats.activeUsers} actifs',
                 icon: Icons.people,
-                color: common.AppColors.primary,
+                color: theme.colorScheme.primary,
               ),
               StatCard(
                 title: 'Cours',
                 value: '${stats.totalCourses}',
                 subtitle: '${stats.publishedCourses} publiés',
                 icon: Icons.school,
-                color: common.AppColors.secondary,
+                color: theme.colorScheme.secondary,
               ),
               StatCard(
                 title: 'Quizzes',
@@ -117,7 +126,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
           // Graphiques et autres contenus à ajouter
           Text(
             'Activité récente',
-            style: common.AppTypography.titleLarge.copyWith(
+            style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -128,8 +137,8 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
               child: Center(
                 child: Text(
                   'Graphiques et activités à venir',
-                  style: common.AppTypography.bodyLarge.copyWith(
-                    color: common.AppColors.textSecondary,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
