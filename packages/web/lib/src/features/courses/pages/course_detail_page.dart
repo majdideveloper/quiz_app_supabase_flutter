@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:common/common.dart' as common;
 import '../../../common/widgets/app_navbar.dart';
+import '../../../common/widgets/app_footer.dart';
 import '../../../core/utils/responsive_helper.dart';
 import '../widgets/lesson_list_tab.dart';
 import '../widgets/quiz_list_tab.dart';
@@ -74,6 +75,9 @@ class _CourseDetailPageState extends State<CourseDetailPage>
 
                     // Onglets
                     _buildTabs(context, course),
+
+                    // Footer
+                    const AppFooter(),
                   ],
                 ),
               );
@@ -90,6 +94,9 @@ class _CourseDetailPageState extends State<CourseDetailPage>
 
                     // Onglets
                     _buildTabs(context, course),
+
+                    // Footer
+                    const AppFooter(),
                   ],
                 ),
               );

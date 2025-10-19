@@ -44,6 +44,7 @@ class _CourseSidebarState extends State<CourseSidebar> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Titre
           Text(
@@ -93,7 +94,7 @@ class _CourseSidebarState extends State<CourseSidebar> {
           const SizedBox(height: 12),
           _buildCategoryFilter(),
 
-          const Spacer(),
+          const SizedBox(height: 32),
 
           // Bouton réinitialiser
           SizedBox(
