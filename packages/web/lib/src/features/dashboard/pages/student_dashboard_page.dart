@@ -29,48 +29,46 @@ class _StudentDashboardPageState extends State<StudentDashboardPage> {
 
     return Scaffold(
       appBar: const AppNavbar(),
-      body: Column(
-        children: [
-          // Header
-          _buildHeader(context, theme, isMobile),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Header
+            _buildHeader(context, theme, isMobile),
 
-          // Contenu principal
-          Expanded(
-            child: SingleChildScrollView(
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: ResponsiveHelper.getMaxContentWidth(context),
+            // Contenu principal
+            Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: ResponsiveHelper.getMaxContentWidth(context),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(
+                    ResponsiveHelper.getHorizontalPadding(context),
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(
-                      ResponsiveHelper.getHorizontalPadding(context),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 32),
 
-                        // Statistiques rapides
-                        _buildQuickStats(context, theme, isMobile),
+                      // Statistiques rapides
+                      _buildQuickStats(context, theme, isMobile),
 
-                        const SizedBox(height: 48),
+                      const SizedBox(height: 48),
 
-                        // Cours inscrits
-                        _buildEnrolledCourses(context, theme),
+                      // Cours inscrits
+                      _buildEnrolledCourses(context, theme),
 
-                        const SizedBox(height: 48),
-                      ],
-                    ),
+                      const SizedBox(height: 48),
+                    ],
                   ),
                 ),
               ),
             ),
-          ),
 
-          // Footer
-          const AppFooter(),
-        ],
+            // Footer
+            const AppFooter(),
+          ],
+        ),
       ),
     );
   }
