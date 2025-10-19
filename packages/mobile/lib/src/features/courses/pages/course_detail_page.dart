@@ -19,9 +19,17 @@ class CourseDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<CourseBloc>()
-        ..add(CourseEvent.loadCourseLessons(courseId)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<CourseBloc>()
+            ..add(CourseEvent.loadCourseLessons(courseId)),
+        ),
+        BlocProvider(
+          create: (context) => getIt<QuizBloc>()
+            ..add(QuizEvent.loadCourseQuizzes(courseId)),
+        ),
+      ],
       child: CourseDetailView(courseId: courseId),
     );
   }
@@ -372,26 +380,244 @@ class CourseDetailView extends StatelessWidget {
   }
 
   Widget _buildQuizzesTab(BuildContext context, CourseEntity course) {
-    // TODO: Load quizzes for this course
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.quiz_outlined,
-            size: 64,
-            color: AppColors.textSecondary,
+    return BlocBuilder<QuizBloc, QuizState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          quizzesLoaded: (quizzes) {
+            if (quizzes.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.quiz_outlined,
+                      size: 64,
+                      color: AppColors.textSecondary,
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    Text(
+                      'No quizzes available yet',
+                      style: AppTypography.bodyLarge.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              itemCount: quizzes.length,
+              itemBuilder: (context, index) {
+                final quiz = quizzes[index];
+                return _buildQuizCard(context, course, quiz);
+              },
+            );
+          },
+          quizLoaded: (_, __) => const Center(child: CircularProgressIndicator()),
+          quizInProgress: (_, __, ___, ____, _____, ______) =>
+              const Center(child: CircularProgressIndicator()),
+          quizSubmitted: (_, __, ___, ____) =>
+              const Center(child: CircularProgressIndicator()),
+          error: (message) => Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  size: 64,
+                  color: AppColors.error,
+                ),
+                const SizedBox(height: AppSpacing.md),
+                Text(
+                  message,
+                  style: AppTypography.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: AppSpacing.md),
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<QuizBloc>().add(
+                          QuizEvent.loadCourseQuizzes(course.id),
+                        );
+                  },
+                  child: const Text('Retry'),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: AppSpacing.md),
+        );
+      },
+    );
+  }
+
+  Widget _buildQuizCard(
+    BuildContext context,
+    CourseEntity course,
+    QuizEntity quiz,
+  ) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: InkWell(
+        onTap: () {
+          context.push('/quizzes/${quiz.id}');
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  // Quiz type icon
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: _getQuizTypeColor(quiz.quizType).withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      _getQuizTypeIcon(quiz.quizType),
+                      color: _getQuizTypeColor(quiz.quizType),
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  // Quiz info
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          quiz.title,
+                          style: AppTypography.titleSmall,
+                        ),
+                        const SizedBox(height: AppSpacing.xs),
+                        Text(
+                          quiz.quizTypeDisplayName,
+                          style: AppTypography.bodySmall.copyWith(
+                            color: _getQuizTypeColor(quiz.quizType),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Required badge
+                  if (quiz.isRequired)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.error.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        'Required',
+                        style: AppTypography.bodySmall.copyWith(
+                          color: AppColors.error,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              if (quiz.description.isNotEmpty) ...[
+                const SizedBox(height: AppSpacing.sm),
+                Text(
+                  quiz.description,
+                  style: AppTypography.bodyMedium.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+              const SizedBox(height: AppSpacing.sm),
+              // Quiz metadata
+              Wrap(
+                spacing: AppSpacing.sm,
+                runSpacing: AppSpacing.xs,
+                children: [
+                  _buildQuizMetaChip(
+                    Icons.quiz,
+                    '${quiz.questionsCount} questions',
+                  ),
+                  _buildQuizMetaChip(
+                    Icons.percent,
+                    'Pass: ${quiz.passingScore}%',
+                  ),
+                  if (quiz.hasTimeLimit)
+                    _buildQuizMetaChip(
+                      Icons.timer,
+                      quiz.formattedTimeLimit,
+                    ),
+                  if (quiz.hasMaxAttempts)
+                    _buildQuizMetaChip(
+                      Icons.refresh,
+                      quiz.formattedMaxAttempts,
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuizMetaChip(IconData icon, String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+        vertical: 4,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceVariant,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14, color: AppColors.textSecondary),
+          const SizedBox(width: 4),
           Text(
-            'Quizzes will be displayed here',
-            style: AppTypography.bodyLarge.copyWith(
+            label,
+            style: AppTypography.bodySmall.copyWith(
               color: AppColors.textSecondary,
             ),
           ),
         ],
       ),
     );
+  }
+
+  Color _getQuizTypeColor(QuizType type) {
+    switch (type) {
+      case QuizType.lesson:
+        return AppColors.primary;
+      case QuizType.midterm:
+        return Colors.orange;
+      case QuizType.finalExam:
+        return AppColors.error;
+    }
+  }
+
+  IconData _getQuizTypeIcon(QuizType type) {
+    switch (type) {
+      case QuizType.lesson:
+        return Icons.quiz;
+      case QuizType.midterm:
+        return Icons.assignment;
+      case QuizType.finalExam:
+        return Icons.workspace_premium;
+    }
   }
 
   Widget _buildErrorState(BuildContext context, String message) {
