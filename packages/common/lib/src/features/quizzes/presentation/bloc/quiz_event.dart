@@ -5,6 +5,9 @@ part 'quiz_event.freezed.dart';
 /// Quiz events
 @freezed
 class QuizEvent with _$QuizEvent {
+  /// Load quizzes for a course
+  const factory QuizEvent.loadCourseQuizzes(String courseId) = LoadCourseQuizzesEvent;
+
   /// Load quiz by ID
   const factory QuizEvent.loadQuiz(String quizId) = LoadQuizEvent;
 

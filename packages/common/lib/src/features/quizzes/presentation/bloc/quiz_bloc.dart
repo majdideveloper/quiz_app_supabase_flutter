@@ -27,6 +27,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     this._quizRepository,
     this._getCurrentUserUseCase,
   ) : super(const QuizState.initial()) {
+    on<LoadCourseQuizzesEvent>(_onLoadCourseQuizzes);
     on<LoadQuizEvent>(_onLoadQuiz);
     on<StartQuizEvent>(_onStartQuiz);
     on<AnswerQuestionEvent>(_onAnswerQuestion);
@@ -46,6 +47,21 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   // ==========================================================================
   // EVENT HANDLERS
   // ==========================================================================
+
+  /// Handles load course quizzes request
+  Future<void> _onLoadCourseQuizzes(
+    LoadCourseQuizzesEvent event,
+    Emitter<QuizState> emit,
+  ) async {
+    emit(const QuizState.loading());
+
+    final result = await _quizRepository.getCourseQuizzes(event.courseId);
+
+    result.fold(
+      (failure) => emit(QuizState.error(message: failure.message)),
+      (quizzes) => emit(QuizState.quizzesLoaded(quizzes: quizzes)),
+    );
+  }
 
   /// Handles quiz load request
   Future<void> _onLoadQuiz(
