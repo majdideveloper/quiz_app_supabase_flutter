@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +7,32 @@ import 'package:common/common.dart' as common;
 import '../../features/home/pages/home_page.dart';
 import '../../features/auth/pages/login_page.dart';
 import '../../features/auth/pages/register_page.dart';
+import '../../features/courses/pages/course_list_page.dart';
+import '../../features/courses/pages/course_detail_page.dart';
+import '../../features/courses/pages/lesson_page.dart';
+import '../../features/dashboard/pages/student_dashboard_page.dart';
+import '../../features/admin/pages/admin_dashboard_page.dart';
+import '../../features/admin/pages/user_management_page.dart';
+import '../../features/admin/pages/course_management_page.dart';
+import '../../features/admin/pages/quiz_management_page.dart';
+
+/// Helper class to refresh GoRouter when auth state changes
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen((_) {
+      notifyListeners();
+    });
+  }
+
+  late final StreamSubscription<dynamic> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
 
 class AppRouter {
   AppRouter._();
@@ -20,9 +47,12 @@ class AppRouter {
   static const String profilePath = '/profile';
 
   static GoRouter createRouter() {
+    final authBloc = common.getIt<common.AuthBloc>();
+
     return GoRouter(
       initialLocation: homePath,
       debugLogDiagnostics: true,
+      refreshListenable: GoRouterRefreshStream(authBloc.stream),
 
       // Redirect logic for auth
       redirect: (context, state) {
@@ -38,11 +68,19 @@ class AppRouter {
                      state.matchedLocation.startsWith('/courses/'),
         );
 
-        // TODO: Implement proper auth check
-        final isLoggedIn = false; // Replace with actual auth check
+        // Check auth state from BLoC
+        final authState = authBloc.state;
+
+        final isLoggedIn = authState.maybeWhen(
+          authenticated: (_) => true,
+          orElse: () => false,
+        );
+
+        print('[AppRouter] redirect: matchedLocation=${state.matchedLocation}, isLoggedIn=$isLoggedIn, authState=$authState');
 
         // Redirect to login if accessing protected route while not logged in
         if (!isLoggedIn && !isPublicRoute) {
+          print('[AppRouter] Redirecting to login: user not authenticated');
           return loginPath;
         }
 
@@ -50,9 +88,11 @@ class AppRouter {
         if (isLoggedIn &&
             (state.matchedLocation == loginPath ||
              state.matchedLocation == registerPath)) {
+          print('[AppRouter] Redirecting to dashboard: user already authenticated');
           return dashboardPath;
         }
 
+        print('[AppRouter] No redirect needed');
         return null; // No redirect
       },
 
@@ -70,28 +110,100 @@ class AppRouter {
         GoRoute(
           path: loginPath,
           name: 'login',
-          builder: (context, state) => BlocProvider(
-            create: (_) => common.getIt<common.AuthBloc>(),
-            child: const LoginPage(),
-          ),
+          builder: (context, state) => const LoginPage(),
         ),
 
         GoRoute(
           path: registerPath,
           name: 'register',
+          builder: (context, state) => const RegisterPage(),
+        ),
+
+        // Courses routes
+        GoRoute(
+          path: coursesPath,
+          name: 'courses',
           builder: (context, state) => BlocProvider(
-            create: (_) => common.getIt<common.AuthBloc>(),
-            child: const RegisterPage(),
+            create: (_) => common.getIt<common.CourseBloc>(),
+            child: const CourseListPage(),
           ),
         ),
 
-        // Courses routes will be added later
+        GoRoute(
+          path: courseDetailPath,
+          name: 'course-detail',
+          builder: (context, state) {
+            final courseId = state.pathParameters['id']!;
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => common.getIt<common.CourseBloc>()),
+                BlocProvider(create: (_) => common.getIt<common.QuizBloc>()),
+              ],
+              child: CourseDetailPage(courseId: courseId),
+            );
+          },
+        ),
+
+        GoRoute(
+          path: '/courses/:courseId/lessons/:lessonId',
+          name: 'lesson',
+          builder: (context, state) {
+            final courseId = state.pathParameters['courseId']!;
+            final lessonId = state.pathParameters['lessonId']!;
+            return LessonPage(
+              courseId: courseId,
+              lessonId: lessonId,
+            );
+          },
+        ),
 
         // ========================================================================
-        // PROTECTED ROUTES (TODO: Add after home/auth pages work)
+        // PROTECTED ROUTES (Student Dashboard)
         // ========================================================================
 
-        // Dashboard, Profile, etc.
+        GoRoute(
+          path: dashboardPath,
+          name: 'dashboard',
+          builder: (context, state) => BlocProvider(
+            create: (_) => common.getIt<common.CourseBloc>(),
+            child: const StudentDashboardPage(),
+          ),
+        ),
+
+        // ========================================================================
+        // ADMIN ROUTES
+        // ========================================================================
+
+        GoRoute(
+          path: '/admin',
+          name: 'admin',
+          builder: (context, state) => BlocProvider(
+            create: (_) => common.getIt<common.AdminBloc>(),
+            child: const AdminDashboardPage(),
+          ),
+        ),
+
+        GoRoute(
+          path: '/admin/users',
+          name: 'admin-users',
+          builder: (context, state) => const UserManagementPage(),
+        ),
+
+        GoRoute(
+          path: '/admin/courses',
+          name: 'admin-courses',
+          builder: (context, state) => const CourseManagementPage(),
+        ),
+
+        GoRoute(
+          path: '/admin/quizzes',
+          name: 'admin-quizzes',
+          builder: (context, state) => const QuizManagementPage(),
+        ),
+
+        // ========================================================================
+        // PROTECTED ROUTES (TODO: Dashboard, Profile, etc.)
+        // ========================================================================
       ],
 
       errorBuilder: (context, state) => Scaffold(

@@ -50,6 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final isMobile = ResponsiveHelper.isMobile(context);
 
     return Scaffold(
@@ -65,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(message),
-                  backgroundColor: common.AppColors.error,
+                  backgroundColor: theme.colorScheme.error,
                 ),
               );
             },
@@ -98,17 +99,17 @@ class _RegisterPageState extends State<RegisterPage> {
                           children: [
                             // Title
                             Text(
-                              'Get Started',
-                              style: common.AppTypography.headlineMedium.copyWith(
+                              'Créer un compte',
+                              style: theme.textTheme.headlineMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: common.AppSpacing.xs),
                             Text(
-                              'Create your account to start learning',
-                              style: common.AppTypography.bodyMedium.copyWith(
-                                color: common.AppColors.textSecondary,
+                              'Rejoignez-nous pour commencer votre apprentissage',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onSurfaceVariant,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -243,9 +244,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                     horizontal: common.AppSpacing.sm,
                                   ),
                                   child: Text(
-                                    'OR',
-                                    style: common.AppTypography.bodySmall.copyWith(
-                                      color: common.AppColors.textSecondary,
+                                    'OU',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurfaceVariant,
                                     ),
                                   ),
                                 ),
@@ -259,12 +260,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Already have an account? ',
-                                  style: common.AppTypography.bodyMedium,
+                                  'Déjà un compte? ',
+                                  style: theme.textTheme.bodyMedium,
                                 ),
                                 TextButton(
                                   onPressed: () => context.go('/login'),
-                                  child: const Text('Sign In'),
+                                  child: const Text('Se connecter'),
                                 ),
                               ],
                             ),

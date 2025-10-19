@@ -17,3 +17,6 @@ export 'enrollment/enrollment.dart';
 
 // Profile feature
 export 'profile/profile.dart';
+
+// Admin feature
+export 'admin/admin.dart';

@@ -41,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final isMobile = ResponsiveHelper.isMobile(context);
 
     return Scaffold(
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(message),
-                  backgroundColor: common.AppColors.error,
+                  backgroundColor: theme.colorScheme.error,
                 ),
               );
             },
@@ -89,17 +90,17 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             // Title
                             Text(
-                              'Welcome Back',
-                              style: common.AppTypography.headlineMedium.copyWith(
+                              'Bienvenue',
+                              style: theme.textTheme.headlineMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: common.AppSpacing.xs),
                             Text(
-                              'Sign in to continue your learning',
-                              style: common.AppTypography.bodyMedium.copyWith(
-                                color: common.AppColors.textSecondary,
+                              'Connectez-vous pour continuer votre apprentissage',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onSurfaceVariant,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -184,9 +185,9 @@ class _LoginPageState extends State<LoginPage> {
                                     horizontal: common.AppSpacing.sm,
                                   ),
                                   child: Text(
-                                    'OR',
-                                    style: common.AppTypography.bodySmall.copyWith(
-                                      color: common.AppColors.textSecondary,
+                                    'OU',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurfaceVariant,
                                     ),
                                   ),
                                 ),
@@ -200,12 +201,12 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Don't have an account? ",
-                                  style: common.AppTypography.bodyMedium,
+                                  "Pas encore de compte? ",
+                                  style: theme.textTheme.bodyMedium,
                                 ),
                                 TextButton(
                                   onPressed: () => context.go('/register'),
-                                  child: const Text('Sign Up'),
+                                  child: const Text('S\'inscrire'),
                                 ),
                               ],
                             ),

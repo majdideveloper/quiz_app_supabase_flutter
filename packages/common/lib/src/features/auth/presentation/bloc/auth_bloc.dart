@@ -12,7 +12,9 @@ import 'auth_state.dart';
 /// - Registration
 /// - Logout
 /// - Auth status checking
-@injectable
+///
+/// IMPORTANT: This is a singleton to maintain auth state across the app
+@lazySingleton
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase _loginUseCase;
   final RegisterUseCase _registerUseCase;

@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
 import '../../../common.dart' as _i607;
+import '../../features/admin/presentation/bloc/admin_bloc.dart' as _i55;
 import '../../features/auth/data/datasources/auth_remote_datasource.dart'
     as _i161;
 import '../../features/auth/data/repositories/auth_repository_impl.dart'
@@ -100,6 +101,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
+    gh.factory<_i55.AdminBloc>(() => _i55.AdminBloc());
     gh.lazySingleton<_i454.SupabaseClient>(() => registerModule.supabaseClient);
     gh.lazySingleton<_i888.CourseRemoteDataSource>(
       () => _i888.CourseRemoteDataSourceImpl(gh<_i454.SupabaseClient>()),
@@ -214,7 +216,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i17.GetCurrentUserUseCase>(
       () => _i17.GetCurrentUserUseCase(gh<_i787.AuthRepository>()),
     );
-    gh.factory<_i797.AuthBloc>(
+    gh.lazySingleton<_i797.AuthBloc>(
       () => _i797.AuthBloc(
         loginUseCase: gh<_i607.LoginUseCase>(),
         registerUseCase: gh<_i607.RegisterUseCase>(),
