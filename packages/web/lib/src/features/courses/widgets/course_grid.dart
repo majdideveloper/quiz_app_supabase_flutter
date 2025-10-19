@@ -47,6 +47,8 @@ class CourseGrid extends StatelessWidget {
     final columns = ResponsiveHelper.getGridColumns(context);
 
     return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.all(
         ResponsiveHelper.getHorizontalPadding(context),
       ),

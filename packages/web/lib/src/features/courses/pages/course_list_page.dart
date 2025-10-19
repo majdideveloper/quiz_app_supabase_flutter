@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:common/common.dart' as common;
 import '../../../common/widgets/app_navbar.dart';
 import '../../../common/widgets/app_footer.dart';
-import '../../../common/widgets/responsive_layout.dart';
 import '../../../core/utils/responsive_helper.dart';
 import '../widgets/course_grid.dart';
 import '../widgets/course_sidebar.dart';
@@ -34,28 +33,50 @@ class _CourseListPageState extends State<CourseListPage> {
 
     return Scaffold(
       appBar: const AppNavbar(),
-      body: Column(
-        children: [
-          // Header
-          _buildHeader(context),
+      body: BlocBuilder<common.CourseBloc, common.CourseState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => const Center(
+              child: Text('Chargement initial...'),
+            ),
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            coursesLoaded: (courses, selectedCategory, selectedLevel, searchQuery) {
+              final filteredCourses = _filterCourses(courses);
 
-          // Contenu principal
-          Expanded(
-            child: BlocBuilder<common.CourseBloc, common.CourseState>(
-              builder: (context, state) {
-                return state.when(
-                  initial: () => const Center(
-                    child: Text('Chargement initial...'),
-                  ),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  coursesLoaded: (courses, selectedCategory, selectedLevel, searchQuery) {
-                    final filteredCourses = _filterCourses(courses);
+              // Sur mobile, tout est dans un scroll vertical
+              if (isMobile) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Header
+                      _buildHeader(context),
 
-                    return ResponsiveLayout(
-                      showSidebar: !isMobile,
-                      sidebar: CourseSidebar(
+                      // Filtres mobiles
+                      _buildMobileFilters(),
+
+                      // Grille de cours
+                      filteredCourses.isEmpty
+                          ? _buildEmptyState()
+                          : CourseGrid(courses: filteredCourses),
+
+                      // Footer
+                      const AppFooter(),
+                    ],
+                  ),
+                );
+              }
+
+              // Sur desktop, sidebar fixe + contenu scrollable
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Sidebar fixe
+                  SizedBox(
+                    width: 280,
+                    child: SingleChildScrollView(
+                      child: CourseSidebar(
                         onCategoryChanged: (category) {
                           setState(() => _selectedCategory = category);
                         },
@@ -66,62 +87,77 @@ class _CourseListPageState extends State<CourseListPage> {
                           setState(() => _searchQuery = query);
                         },
                       ),
+                    ),
+                  ),
+
+                  // Contenu principal scrollable
+                  Expanded(
+                    child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          // Filtres mobiles
-                          if (isMobile) _buildMobileFilters(),
+                          // Header
+                          _buildHeader(context),
 
                           // Grille de cours
-                          Expanded(
-                            child: filteredCourses.isEmpty
-                                ? _buildEmptyState()
-                                : CourseGrid(courses: filteredCourses),
+                          filteredCourses.isEmpty
+                              ? _buildEmptyState()
+                              : CourseGrid(courses: filteredCourses),
+
+                          // Footer
+                          const AppFooter(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+            courseDetailLoaded: (course) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            courseLessonsLoaded: (course, lessons) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            error: (message) => SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildHeader(context),
+                  SizedBox(
+                    height: 400,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 64,
+                            color: common.AppColors.error,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'Erreur: $message',
+                            style: common.AppTypography.titleMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<common.CourseBloc>()
+                                  .add(const common.CourseEvent.loadCourses());
+                            },
+                            child: const Text('Réessayer'),
                           ),
                         ],
                       ),
-                    );
-                  },
-                  courseDetailLoaded: (course) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  courseLessonsLoaded: (course, lessons) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  error: (message) => Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          size: 64,
-                          color: common.AppColors.error,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Erreur: $message',
-                          style: common.AppTypography.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                            context
-                                .read<common.CourseBloc>()
-                                .add(const common.CourseEvent.loadCourses());
-                          },
-                          child: const Text('Réessayer'),
-                        ),
-                      ],
                     ),
                   ),
-                );
-              },
+                  const AppFooter(),
+                ],
+              ),
             ),
-          ),
-
-          // Footer
-          const AppFooter(),
-        ],
+          );
+        },
       ),
       // Bouton flottant pour filtres sur mobile
       floatingActionButton: isMobile
