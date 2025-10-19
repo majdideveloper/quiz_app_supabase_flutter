@@ -76,11 +76,13 @@ class AppRouter {
           orElse: () => false,
         );
 
-        print('[AppRouter] redirect: matchedLocation=${state.matchedLocation}, isLoggedIn=$isLoggedIn, authState=$authState');
+        // Redirect logged-in users from home to dashboard
+        if (isLoggedIn && state.matchedLocation == homePath) {
+          return dashboardPath;
+        }
 
         // Redirect to login if accessing protected route while not logged in
         if (!isLoggedIn && !isPublicRoute) {
-          print('[AppRouter] Redirecting to login: user not authenticated');
           return loginPath;
         }
 
@@ -88,11 +90,9 @@ class AppRouter {
         if (isLoggedIn &&
             (state.matchedLocation == loginPath ||
              state.matchedLocation == registerPath)) {
-          print('[AppRouter] Redirecting to dashboard: user already authenticated');
           return dashboardPath;
         }
 
-        print('[AppRouter] No redirect needed');
         return null; // No redirect
       },
 
