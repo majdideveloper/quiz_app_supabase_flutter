@@ -34,26 +34,26 @@ class _CourseListPageState extends State<CourseListPage> {
 
     return Scaffold(
       appBar: const AppNavbar(),
-      body: Column(
-        children: [
-          // Header
-          _buildHeader(context),
+      body: BlocBuilder<common.CourseBloc, common.CourseState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => const Center(
+              child: Text('Chargement initial...'),
+            ),
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            coursesLoaded: (courses, selectedCategory, selectedLevel, searchQuery) {
+              final filteredCourses = _filterCourses(courses);
 
-          // Contenu principal
-          Expanded(
-            child: BlocBuilder<common.CourseBloc, common.CourseState>(
-              builder: (context, state) {
-                return state.when(
-                  initial: () => const Center(
-                    child: Text('Chargement initial...'),
-                  ),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  coursesLoaded: (courses, selectedCategory, selectedLevel, searchQuery) {
-                    final filteredCourses = _filterCourses(courses);
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // Header
+                    _buildHeader(context),
 
-                    return ResponsiveLayout(
+                    // Contenu principal
+                    ResponsiveLayout(
                       showSidebar: !isMobile,
                       sidebar: CourseSidebar(
                         onCategoryChanged: (category) {
@@ -72,56 +72,65 @@ class _CourseListPageState extends State<CourseListPage> {
                           if (isMobile) _buildMobileFilters(),
 
                           // Grille de cours
-                          Expanded(
-                            child: filteredCourses.isEmpty
-                                ? _buildEmptyState()
-                                : CourseGrid(courses: filteredCourses),
+                          filteredCourses.isEmpty
+                              ? _buildEmptyState()
+                              : CourseGrid(courses: filteredCourses),
+                        ],
+                      ),
+                    ),
+
+                    // Footer
+                    const AppFooter(),
+                  ],
+                ),
+              );
+            },
+            courseDetailLoaded: (course) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            courseLessonsLoaded: (course, lessons) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            error: (message) => SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildHeader(context),
+                  SizedBox(
+                    height: 400,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error_outline,
+                            size: 64,
+                            color: common.AppColors.error,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'Erreur: $message',
+                            style: common.AppTypography.titleMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () {
+                              context
+                                  .read<common.CourseBloc>()
+                                  .add(const common.CourseEvent.loadCourses());
+                            },
+                            child: const Text('Réessayer'),
                           ),
                         ],
                       ),
-                    );
-                  },
-                  courseDetailLoaded: (course) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  courseLessonsLoaded: (course, lessons) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  error: (message) => Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          size: 64,
-                          color: common.AppColors.error,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Erreur: $message',
-                          style: common.AppTypography.titleMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                            context
-                                .read<common.CourseBloc>()
-                                .add(const common.CourseEvent.loadCourses());
-                          },
-                          child: const Text('Réessayer'),
-                        ),
-                      ],
                     ),
                   ),
-                );
-              },
+                  const AppFooter(),
+                ],
+              ),
             ),
-          ),
-
-          // Footer
-          const AppFooter(),
-        ],
+          );
+        },
       ),
       // Bouton flottant pour filtres sur mobile
       floatingActionButton: isMobile
