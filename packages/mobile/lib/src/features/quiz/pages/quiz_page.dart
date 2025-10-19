@@ -56,6 +56,9 @@ class QuizView extends StatelessWidget {
           loading: () => const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           ),
+          quizzesLoaded: (quizzes) => const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          ),
           quizLoaded: (quiz, questions) =>
               _buildQuizIntro(context, quiz, questions),
           quizInProgress: (quiz, questions, answers, currentIndex, startTime, timeRemaining) =>
