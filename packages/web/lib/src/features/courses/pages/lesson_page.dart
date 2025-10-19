@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:common/common.dart' as common;
 import '../../../common/widgets/app_navbar.dart';
+import '../../../common/widgets/app_footer.dart';
 import '../../../core/utils/responsive_helper.dart';
 import '../widgets/web_video_player.dart';
 
@@ -169,6 +170,9 @@ class _LessonPageState extends State<LessonPage> {
                 ),
               ),
             ),
+
+            // Footer
+            const AppFooter(),
           ],
         ),
       ),
