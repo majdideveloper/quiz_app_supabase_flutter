@@ -62,7 +62,6 @@ class QuizRemoteDataSourceImpl implements QuizRemoteDataSource {
           .from('quizzes')
           .select()
           .eq('lesson_id', lessonId)
-          .eq('is_active', true)
           .single();
 
       final quiz = QuizModel.fromJson(response);
@@ -105,8 +104,7 @@ class QuizRemoteDataSourceImpl implements QuizRemoteDataSource {
           .from('quizzes')
           .select()
           .eq('course_id', courseId)
-          .eq('is_active', true)
-          .order('quiz_type');
+          .order('order_index');
 
       final quizzes = (response as List)
           .map((json) => QuizModel.fromJson(json))
