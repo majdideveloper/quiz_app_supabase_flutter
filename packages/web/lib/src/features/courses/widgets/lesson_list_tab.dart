@@ -5,27 +5,13 @@ import 'package:common/common.dart' as common;
 import '../../../core/utils/responsive_helper.dart';
 
 /// Onglet affichant la liste des leçons d'un cours
-class LessonListTab extends StatefulWidget {
+class LessonListTab extends StatelessWidget {
   final String courseId;
 
   const LessonListTab({
     super.key,
     required this.courseId,
   });
-
-  @override
-  State<LessonListTab> createState() => _LessonListTabState();
-}
-
-class _LessonListTabState extends State<LessonListTab> {
-  @override
-  void initState() {
-    super.initState();
-    // Charger les leçons si pas déjà fait
-    context.read<common.CourseBloc>().add(
-          common.CourseEvent.loadCourseLessons(widget.courseId),
-        );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +23,7 @@ class _LessonListTabState extends State<LessonListTab> {
               return _buildEmptyState();
             }
 
-            return _buildLessonList(lessons);
+            return _buildLessonList(context, lessons);
           },
           orElse: () => const Center(
             child: CircularProgressIndicator(),
@@ -47,7 +33,7 @@ class _LessonListTabState extends State<LessonListTab> {
     );
   }
 
-  Widget _buildLessonList(List<common.LessonEntity> lessons) {
+  Widget _buildLessonList(BuildContext context, List<common.LessonEntity> lessons) {
     return Center(
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -61,18 +47,18 @@ class _LessonListTabState extends State<LessonListTab> {
           separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
             final lesson = lessons[index];
-            return _buildLessonCard(lesson, index + 1);
+            return _buildLessonCard(context, lesson, index + 1);
           },
         ),
       ),
     );
   }
 
-  Widget _buildLessonCard(common.LessonEntity lesson, int number) {
+  Widget _buildLessonCard(BuildContext context, common.LessonEntity lesson, int number) {
     return Card(
       elevation: 1,
       child: InkWell(
-        onTap: () => context.go('/courses/${widget.courseId}/lessons/${lesson.id}'),
+        onTap: () => context.go('/courses/$courseId/lessons/${lesson.id}'),
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(20),

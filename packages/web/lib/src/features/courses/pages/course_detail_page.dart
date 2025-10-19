@@ -30,12 +30,7 @@ class _CourseDetailPageState extends State<CourseDetailPage>
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
 
-    // Charger les détails du cours
-    context.read<common.CourseBloc>().add(
-          common.CourseEvent.loadCourseById(widget.courseId),
-        );
-
-    // Charger les leçons du cours
+    // Charger les leçons du cours (inclut aussi les détails du cours)
     context.read<common.CourseBloc>().add(
           common.CourseEvent.loadCourseLessons(widget.courseId),
         );
@@ -63,28 +58,12 @@ class _CourseDetailPageState extends State<CourseDetailPage>
               child: CircularProgressIndicator(),
             ),
             coursesLoaded: (courses, selectedCategory, selectedLevel, searchQuery) => const Center(
-              child: Text('Chargement du cours...'),
+              child: CircularProgressIndicator(),
             ),
-            courseDetailLoaded: (course) {
-              return SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Header du cours
-                    _buildCourseHeader(context, course, isMobile),
-
-                    // Onglets
-                    _buildTabs(context, course),
-
-                    // Footer
-                    const AppFooter(),
-                  ],
-                ),
-              );
-            },
+            courseDetailLoaded: (course) => const Center(
+              child: CircularProgressIndicator(),
+            ),
             courseLessonsLoaded: (course, lessons) {
-              // Trouver le cours actuel
-
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
