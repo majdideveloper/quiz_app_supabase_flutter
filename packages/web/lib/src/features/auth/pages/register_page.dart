@@ -1,0 +1,285 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:common/common.dart' as common;
+
+import '../../../common/widgets/app_navbar.dart';
+import '../../../core/utils/responsive_helper.dart';
+import '../widgets/auth_form_field.dart';
+import '../widgets/auth_button.dart';
+
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  void _handleRegister() {
+    if (_formKey.currentState!.validate()) {
+      final fullName = '${_firstNameController.text.trim()} ${_lastNameController.text.trim()}';
+      context.read<common.AuthBloc>().add(
+            common.AuthEvent.registerRequested(
+              email: _emailController.text.trim(),
+              password: _passwordController.text,
+              fullName: fullName,
+            ),
+          );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isMobile = ResponsiveHelper.isMobile(context);
+
+    return Scaffold(
+      appBar: const AppNavbar(),
+      body: BlocConsumer<common.AuthBloc, common.AuthState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            authenticated: (user) {
+              // Navigate to dashboard
+              context.go('/dashboard');
+            },
+            error: (message) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(message),
+                  backgroundColor: theme.colorScheme.error,
+                ),
+              );
+            },
+          );
+        },
+        builder: (context, state) {
+          final isLoading = state.maybeWhen(
+            loading: () => true,
+            orElse: () => false,
+          );
+
+          return Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(
+                horizontal: ResponsiveHelper.getHorizontalPadding(context),
+                vertical: isMobile ? 24 : 48,
+              ),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: Card(
+                    elevation: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.all(common.AppSpacing.xl),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            // Title
+                            Text(
+                              'Créer un compte',
+                              style: theme.textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: common.AppSpacing.xs),
+                            Text(
+                              'Rejoignez-nous pour commencer votre apprentissage',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: common.AppSpacing.xl),
+
+                            // First Name field
+                            AuthFormField(
+                              label: 'First Name',
+                              hint: 'Enter your first name',
+                              controller: _firstNameController,
+                              prefixIcon: Icons.person_outline,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your first name';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: common.AppSpacing.md),
+
+                            // Last Name field
+                            AuthFormField(
+                              label: 'Last Name',
+                              hint: 'Enter your last name',
+                              controller: _lastNameController,
+                              prefixIcon: Icons.person_outline,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your last name';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: common.AppSpacing.md),
+
+                            // Email field
+                            AuthFormField(
+                              label: 'Email',
+                              hint: 'Enter your email',
+                              controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              prefixIcon: Icons.email_outlined,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                                if (!value.contains('@')) {
+                                  return 'Please enter a valid email';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: common.AppSpacing.md),
+
+                            // Password field
+                            AuthFormField(
+                              label: 'Password',
+                              hint: 'Enter your password',
+                              controller: _passwordController,
+                              obscureText: _obscurePassword,
+                              prefixIcon: Icons.lock_outline,
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _obscurePassword
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _obscurePassword = !_obscurePassword;
+                                  });
+                                },
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                                if (value.length < 6) {
+                                  return 'Password must be at least 6 characters';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: common.AppSpacing.md),
+
+                            // Confirm Password field
+                            AuthFormField(
+                              label: 'Confirm Password',
+                              hint: 'Re-enter your password',
+                              controller: _confirmPasswordController,
+                              obscureText: _obscureConfirmPassword,
+                              prefixIcon: Icons.lock_outline,
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _obscureConfirmPassword
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _obscureConfirmPassword =
+                                        !_obscureConfirmPassword;
+                                  });
+                                },
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please confirm your password';
+                                }
+                                if (value != _passwordController.text) {
+                                  return 'Passwords do not match';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: common.AppSpacing.xl),
+
+                            // Register button
+                            AuthButton(
+                              text: 'Create Account',
+                              onPressed: _handleRegister,
+                              isLoading: isLoading,
+                            ),
+                            const SizedBox(height: common.AppSpacing.md),
+
+                            // Divider
+                            Row(
+                              children: [
+                                const Expanded(child: Divider()),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: common.AppSpacing.sm,
+                                  ),
+                                  child: Text(
+                                    'OU',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.colorScheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ),
+                                const Expanded(child: Divider()),
+                              ],
+                            ),
+                            const SizedBox(height: common.AppSpacing.md),
+
+                            // Login link
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Déjà un compte? ',
+                                  style: theme.textTheme.bodyMedium,
+                                ),
+                                TextButton(
+                                  onPressed: () => context.go('/login'),
+                                  child: const Text('Se connecter'),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

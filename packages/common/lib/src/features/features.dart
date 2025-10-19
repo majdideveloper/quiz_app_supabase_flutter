@@ -6,6 +6,9 @@ export 'auth/auth.dart';
 // Course feature
 export 'courses/courses.dart';
 
+// Dashboard feature
+export 'dashboard/dashboard.dart';
+
 // Quiz feature
 export 'quizzes/quizzes.dart';
 
@@ -14,3 +17,6 @@ export 'enrollment/enrollment.dart';
 
 // Profile feature
 export 'profile/profile.dart';
+
+// Admin feature
+export 'admin/admin.dart';

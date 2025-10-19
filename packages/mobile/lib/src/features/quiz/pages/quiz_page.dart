@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:common/common.dart';
 
-import '../bloc/quiz_bloc.dart';
-import '../bloc/quiz_event.dart';
-import '../bloc/quiz_state.dart';
 import '../widgets/question_widget.dart';
 import '../widgets/quiz_timer.dart';
 

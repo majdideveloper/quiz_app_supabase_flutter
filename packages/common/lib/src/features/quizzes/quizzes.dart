@@ -19,3 +19,11 @@ export 'data/models/question_model.dart';
 export 'data/models/quiz_model.dart';
 export 'data/models/quiz_result_model.dart';
 export 'data/repositories/quiz_repository_impl.dart';
+
+// Presentation - BLoC
+export 'presentation/bloc/quiz_bloc.dart';
+export 'presentation/bloc/quiz_event.dart';
+export 'presentation/bloc/quiz_state.dart';
+
+// Presentation - Models
+export 'presentation/models/question_with_answers.dart';

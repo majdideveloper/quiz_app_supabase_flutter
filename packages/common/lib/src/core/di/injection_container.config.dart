@@ -13,6 +13,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:supabase_flutter/supabase_flutter.dart' as _i454;
 
+import '../../../common.dart' as _i607;
+import '../../features/admin/presentation/bloc/admin_bloc.dart' as _i55;
 import '../../features/auth/data/datasources/auth_remote_datasource.dart'
     as _i161;
 import '../../features/auth/data/repositories/auth_repository_impl.dart'
@@ -23,6 +25,7 @@ import '../../features/auth/domain/usecases/get_current_user_usecase.dart'
 import '../../features/auth/domain/usecases/login_usecase.dart' as _i188;
 import '../../features/auth/domain/usecases/logout_usecase.dart' as _i48;
 import '../../features/auth/domain/usecases/register_usecase.dart' as _i941;
+import '../../features/auth/presentation/bloc/auth_bloc.dart' as _i797;
 import '../../features/courses/data/datasources/course_remote_datasource.dart'
     as _i888;
 import '../../features/courses/data/repositories/course_repository_impl.dart'
@@ -39,6 +42,9 @@ import '../../features/courses/domain/usecases/get_courses_usecase.dart'
     as _i50;
 import '../../features/courses/domain/usecases/search_courses_usecase.dart'
     as _i1061;
+import '../../features/courses/presentation/bloc/course_bloc.dart' as _i63;
+import '../../features/dashboard/presentation/bloc/dashboard_bloc.dart'
+    as _i652;
 import '../../features/enrollment/data/datasources/enrollment_remote_datasource.dart'
     as _i517;
 import '../../features/enrollment/data/repositories/enrollment_repository_impl.dart'
@@ -57,10 +63,17 @@ import '../../features/profile/data/repositories/profile_repository_impl.dart'
     as _i334;
 import '../../features/profile/domain/repositories/profile_repository.dart'
     as _i894;
+import '../../features/profile/domain/usecases/delete_avatar_usecase.dart'
+    as _i381;
 import '../../features/profile/domain/usecases/get_profile_usecase.dart'
     as _i965;
+import '../../features/profile/domain/usecases/update_preferences_usecase.dart'
+    as _i90;
 import '../../features/profile/domain/usecases/update_profile_usecase.dart'
     as _i478;
+import '../../features/profile/domain/usecases/upload_avatar_usecase.dart'
+    as _i658;
+import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i469;
 import '../../features/quizzes/data/datasources/quiz_remote_datasource.dart'
     as _i413;
 import '../../features/quizzes/data/repositories/quiz_repository_impl.dart'
@@ -77,6 +90,7 @@ import '../../features/quizzes/domain/usecases/get_user_quiz_history_usecase.dar
     as _i883;
 import '../../features/quizzes/domain/usecases/submit_quiz_usecase.dart'
     as _i122;
+import '../../features/quizzes/presentation/bloc/quiz_bloc.dart' as _i51;
 import 'injection_container.dart' as _i809;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -87,6 +101,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
+    gh.factory<_i55.AdminBloc>(() => _i55.AdminBloc());
     gh.lazySingleton<_i454.SupabaseClient>(() => registerModule.supabaseClient);
     gh.lazySingleton<_i888.CourseRemoteDataSource>(
       () => _i888.CourseRemoteDataSourceImpl(gh<_i454.SupabaseClient>()),
@@ -103,6 +118,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i965.GetProfileUseCase>(
       () => _i965.GetProfileUseCase(gh<_i894.ProfileRepository>()),
     );
+    gh.lazySingleton<_i381.DeleteAvatarUseCase>(
+      () => _i381.DeleteAvatarUseCase(gh<_i894.ProfileRepository>()),
+    );
+    gh.lazySingleton<_i658.UploadAvatarUseCase>(
+      () => _i658.UploadAvatarUseCase(gh<_i894.ProfileRepository>()),
+    );
+    gh.lazySingleton<_i90.UpdatePreferencesUseCase>(
+      () => _i90.UpdatePreferencesUseCase(gh<_i894.ProfileRepository>()),
+    );
     gh.lazySingleton<_i517.EnrollmentRemoteDataSource>(
       () => _i517.EnrollmentRemoteDataSourceImpl(gh<_i454.SupabaseClient>()),
     );
@@ -114,6 +138,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i749.CourseRepository>(
       () => _i657.CourseRepositoryImpl(gh<_i888.CourseRemoteDataSource>()),
+    );
+    gh.factory<_i469.ProfileBloc>(
+      () => _i469.ProfileBloc(
+        getProfileUseCase: gh<_i607.GetProfileUseCase>(),
+        updateProfileUseCase: gh<_i607.UpdateProfileUseCase>(),
+        uploadAvatarUseCase: gh<_i607.UploadAvatarUseCase>(),
+        deleteAvatarUseCase: gh<_i607.DeleteAvatarUseCase>(),
+        updatePreferencesUseCase: gh<_i607.UpdatePreferencesUseCase>(),
+      ),
     );
     gh.lazySingleton<_i149.EnrollmentRepository>(
       () => _i752.EnrollmentRepositoryImpl(
@@ -165,6 +198,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i676.GetUserEnrollmentsUseCase>(
       () => _i676.GetUserEnrollmentsUseCase(gh<_i149.EnrollmentRepository>()),
     );
+    gh.factory<_i652.DashboardBloc>(
+      () => _i652.DashboardBloc(
+        gh<_i607.GetProfileUseCase>(),
+        gh<_i607.GetUserEnrollmentsUseCase>(),
+      ),
+    );
     gh.lazySingleton<_i941.RegisterUseCase>(
       () => _i941.RegisterUseCase(gh<_i787.AuthRepository>()),
     );
@@ -176,6 +215,30 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i17.GetCurrentUserUseCase>(
       () => _i17.GetCurrentUserUseCase(gh<_i787.AuthRepository>()),
+    );
+    gh.lazySingleton<_i797.AuthBloc>(
+      () => _i797.AuthBloc(
+        loginUseCase: gh<_i607.LoginUseCase>(),
+        registerUseCase: gh<_i607.RegisterUseCase>(),
+        logoutUseCase: gh<_i607.LogoutUseCase>(),
+        getCurrentUserUseCase: gh<_i607.GetCurrentUserUseCase>(),
+      ),
+    );
+    gh.factory<_i63.CourseBloc>(
+      () => _i63.CourseBloc(
+        gh<_i607.GetCoursesUseCase>(),
+        gh<_i607.GetCourseByIdUseCase>(),
+        gh<_i607.GetCourseLessonsUseCase>(),
+        gh<_i607.SearchCoursesUseCase>(),
+        gh<_i607.FilterCoursesUseCase>(),
+      ),
+    );
+    gh.factory<_i51.QuizBloc>(
+      () => _i51.QuizBloc(
+        gh<_i607.SubmitQuizUseCase>(),
+        gh<_i607.QuizRepository>(),
+        gh<_i607.GetCurrentUserUseCase>(),
+      ),
     );
     return this;
   }

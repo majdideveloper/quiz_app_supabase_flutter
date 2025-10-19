@@ -20,3 +20,8 @@ export 'data/datasources/auth_remote_datasource.dart';
 
 // Data - Repositories
 export 'data/repositories/auth_repository_impl.dart';
+
+// Presentation - BLoC
+export 'presentation/bloc/auth_bloc.dart';
+export 'presentation/bloc/auth_event.dart';
+export 'presentation/bloc/auth_state.dart';
