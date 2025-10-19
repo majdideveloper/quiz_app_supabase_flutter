@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:common/common.dart' as common;
 import '../../../common/widgets/app_navbar.dart';
 import '../../../common/widgets/app_footer.dart';
-import '../../../common/widgets/responsive_layout.dart';
 import '../../../core/utils/responsive_helper.dart';
 import '../widgets/course_grid.dart';
 import '../widgets/course_sidebar.dart';
@@ -46,16 +45,38 @@ class _CourseListPageState extends State<CourseListPage> {
             coursesLoaded: (courses, selectedCategory, selectedLevel, searchQuery) {
               final filteredCourses = _filterCourses(courses);
 
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // Header
-                    _buildHeader(context),
+              // Sur mobile, tout est dans un scroll vertical
+              if (isMobile) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Header
+                      _buildHeader(context),
 
-                    // Contenu principal
-                    ResponsiveLayout(
-                      showSidebar: !isMobile,
-                      sidebar: CourseSidebar(
+                      // Filtres mobiles
+                      _buildMobileFilters(),
+
+                      // Grille de cours
+                      filteredCourses.isEmpty
+                          ? _buildEmptyState()
+                          : CourseGrid(courses: filteredCourses),
+
+                      // Footer
+                      const AppFooter(),
+                    ],
+                  ),
+                );
+              }
+
+              // Sur desktop, sidebar fixe + contenu scrollable
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Sidebar fixe
+                  SizedBox(
+                    width: 280,
+                    child: SingleChildScrollView(
+                      child: CourseSidebar(
                         onCategoryChanged: (category) {
                           setState(() => _selectedCategory = category);
                         },
@@ -66,23 +87,29 @@ class _CourseListPageState extends State<CourseListPage> {
                           setState(() => _searchQuery = query);
                         },
                       ),
+                    ),
+                  ),
+
+                  // Contenu principal scrollable
+                  Expanded(
+                    child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          // Filtres mobiles
-                          if (isMobile) _buildMobileFilters(),
+                          // Header
+                          _buildHeader(context),
 
                           // Grille de cours
                           filteredCourses.isEmpty
                               ? _buildEmptyState()
                               : CourseGrid(courses: filteredCourses),
+
+                          // Footer
+                          const AppFooter(),
                         ],
                       ),
                     ),
-
-                    // Footer
-                    const AppFooter(),
-                  ],
-                ),
+                  ),
+                ],
               );
             },
             courseDetailLoaded: (course) => const Center(
